@@ -1,0 +1,51 @@
+.border-radius(@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+  }
+  
+  .input-placeholder(@color: #a2a4a8) {
+    &::-webkit-input-placeholder {
+      color: @color;
+    }
+  
+    &:-moz-placeholder {
+      color: @color;
+    }
+  
+    &::-moz-placeholder {
+      color: @color;
+    }
+  
+    &:-ms-input-placeholder {
+      color: @color;
+    }
+  
+    &::-ms-input-placeholder {
+      color: @color;
+    }
+  
+    &::placeholder {
+      color: @color;
+    }
+  }
+  
+  .ellipsis(@rowCount: 1) when(@rowCount <=1) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    box-orient: vertical;
+    line-clamp: 1;
+    overflow: hidden;
+    white-space: normal;
+  }
+  
+  .ellipsis(@rowCount) when (@rowCount >1) {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: @rowCount;
+    -webkit-box-orient: vertical;
+  }
+  

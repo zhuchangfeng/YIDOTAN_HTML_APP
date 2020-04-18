@@ -1,0 +1,245 @@
+@baseFontColor: #248888; //基本字体颜色
+@senColor: #868686; //次要的颜色
+
+.f-b {
+  color: @baseFontColor;
+}
+
+.b-c {
+  background-color: @baseFontColor;
+}
+
+.f-s {
+  color: @senColor;
+}
+
+.p-r {
+  position: relative;
+}
+
+.f-l {
+  float: left;
+}
+
+.f-r {
+  float: right;
+}
+
+.t-c {
+  text-align: center;
+}
+
+.pb0 {
+  padding-bottom: 0 !important;
+}
+
+[lazy="loaded"] {
+  opacity: 1 !important;
+}
+
+.loading-parent--relative {
+  position: relative !important;
+}
+
+.loading-parent--hidden {
+  overflow: hidden !important;
+}
+
+.lazy {
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.clearfix {
+  display: block;
+  zoom: 1;
+
+  &:after {
+    content: '\0020';
+    display: block;
+    font-size: 0;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+
+.Oline {
+  /*1行内省略号  */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  box-orient: vertical;
+  line-clamp: 1;
+  overflow: hidden;
+  white-space: normal;
+}
+
+.m::before {
+  content: "¥";
+  padding: 0px;
+  margin: 0px;
+  font-size: 80%;
+  /*加金钱前缀*/
+}
+
+.unit::before {
+  content: "元";
+  padding: 0px;
+  margin: 0px;
+  font-size: 30%;
+}
+
+.borderBottom {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    width: 200%;
+    height: 0;
+    left: 0;
+    bottom: -1px;
+    transform: scale(0.5) translate(-50%, -50%);
+    border-bottom: 1px solid #ccc;
+    z-index: 1;
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+  .borderBottom {
+    position: relative;
+
+    &:before {
+      position: absolute;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      content: "";
+      width: 200%;
+      height: 0;
+      left: 0;
+      bottom: -1px;
+      transform: scale(.5) translate(-50%, -50%);
+      border-bottom: 1px solid #ccc;
+      z-index: 1
+    }
+  }
+}
+
+.borderTop {
+  position: relative;
+
+  &:before {
+    position: absolute;
+    box-sizing: border-box;
+    content: "";
+    width: 100%;
+    height: 0;
+    left: 0;
+    top: -1px;
+    transform: scale(1) translate(0);
+    border-top: 1px solid #ccc;
+    z-index: 1;
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+  .borderTop {
+    &:before {
+      position: absolute;
+      box-sizing: border-box;
+      content: "";
+      width: 200%;
+      height: 0;
+      left: 0;
+      top: -1px;
+      transform: scale(.5) translate(-50%, -50%);
+      border-top: 1px solid #ccc;
+      z-index: 1;
+    }
+  }
+}
+
+.borderBottomAfter {
+  position: relative;
+
+  &:before {
+    position: absolute;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    content: "";
+    width: 100%;
+    height: 0;
+    left: 0;
+    bottom: -1px;
+    -webkit-transform: scale(1) translate(0);
+    -ms-transform: scale(1) translate(0);
+    transform: scale(1) translate(0);
+    border-bottom: 1px solid #ccc;
+    z-index: 1;
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+  .borderBottomAfter {
+    &:before {
+      position: absolute;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      content: "";
+      width: 200%;
+      height: 0;
+      left: 0;
+      bottom: -1px;
+      -webkit-transform: scale(.5) translate(-50%, -50%);
+      -ms-transform: scale(.5) translate(-50%, -50%);
+      transform: scale(.5) translate(-50%, -50%);
+      border-bottom: 1px solid #ccc;
+      z-index: 1;
+    }
+  }
+}
+
+.fourColor0 {
+  position: relative;
+
+  &:before {
+    position: absolute;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    -webkit-transform: scale(1) translate(0);
+    -ms-transform: scale(1) translate(0);
+    transform: scale(1) translate(0);
+    border: 1px solid #ccc;
+    border-radius: 10.4167px;
+    z-index: 1;
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+  .fourColor0 {
+    &:before {
+      position: absolute;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      content: "";
+      width: 200%;
+      height: 200%;
+      top: 0;
+      left: 0;
+      -webkit-transform: scale(.5) translate(-50%, -50%);
+      -ms-transform: scale(.5) translate(-50%, -50%);
+      transform: scale(.5) translate(-50%, -50%);
+      border: 1px solid #ccc;
+      border-radius: 10.4167px;
+      z-index: 1;
+    }
+  }
+}
