@@ -1,6 +1,4 @@
-export default [
-    // 疑问圈
-    {
+export default [{
         path: '/HelloWorld',
         name: 'HelloWorld',
         component: resolve => require(['@/components/HelloWorld.vue'], resolve),
@@ -180,6 +178,16 @@ export default [
                 }
             }
         ]
+    },
+    {
+        path: "/pic/list/:space/:style/:part/:soft/:order/:sharing",
+        component: resolve => require(['@/page/pic/list/index.vue'], resolve),
+        name: "pic-list",
+        meta: {
+            // keepAlive: true, // 不需要被缓存
+            Tbshow: false, //是否显示tabbar
+            TopTitlehide: false, //是否隐藏标题,
+        }
     },
     {
         path: "*",
