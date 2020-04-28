@@ -252,4 +252,20 @@ export function parseUrl(name) {
         return unescape(r[2])
     }
     return null
+};
+/**
+ * @description
+ * 随机颜色 
+ * @param {number} opacity
+ * @returns {string} 返回判断结果
+ * @export
+ * @example
+ * rgba(199, 223, 145, 0.3);
+ */
+export function randomColor(opacity = 0.3) {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    const a = /^0\.[1-9]\d*$/.test(opacity) ? opacity : 1
+    return "rgb(" + r + ',' + g + ',' + b + ',' + opacity + ")";
 }
