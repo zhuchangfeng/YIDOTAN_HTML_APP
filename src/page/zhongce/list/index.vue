@@ -66,7 +66,7 @@ export default {
 	},
 	mounted() {
 		this.getList();
-	},
+	}
 };
 </script>
 

@@ -141,6 +141,31 @@ export default {};
     transform: translateY(-28px);
   }
 }
+@keyframes loading {
+  0%, 100% {
+    -moz-transform: scale(1) rotateZ(0deg);
+    -ms-transform: scale(1) rotateZ(0deg);
+    -webkit-transform: scale(1) rotateZ(0deg);
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+  }
+
+  26% {
+    -moz-transform: scale(1.1) rotateZ(12deg);
+    -ms-transform: scale(1.1) rotateZ(12deg);
+    -webkit-transform: scale(1.1) rotateZ(12deg);
+    transform: scale(1.1) rotateZ(12deg);
+    opacity: .2;
+  }
+
+  76% {
+    -moz-transform: scale(0.8) rotateZ(-8deg);
+    -ms-transform: scale(0.8) rotateZ(-8deg);
+    -webkit-transform: scale(0.8) rotateZ(-8deg);
+    transform: scale(0.8) rotateZ(-8deg);
+    opacity: .6;
+  }
+}
 #Found_404 {
   position: absolute;
   width: 100%;
@@ -195,7 +220,8 @@ export default {};
       left: 93.2286555447%;
       font-size: 19px;
       filter: blur(0.02px);
-      animation: 28s float2 infinite;
+      // animation: 28s float2 infinite;
+       animation: loading 1s linear infinite -1.1s;
     }
     .particle:nth-child(2) {
       top: 19.536019536%;
