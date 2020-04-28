@@ -66,4 +66,16 @@ export const getDecorateList = (obj) => request({
     method: "GET",
     url: "/master/decorate",
     ...createObj(obj)
+});
+
+export const getAlbum = (obj) => request({
+    method: "GET",
+    url: "/album",
+    ...createObj(obj)
+});
+
+export const getActivitetags = (obj) => request({
+    method: "GET",
+    url: "/photo/activitetags",
+    ...createObj(obj)
 })
