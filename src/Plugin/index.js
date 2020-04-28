@@ -4,6 +4,7 @@ import MessageBox from '../Plugin/message-box/index.js';
 
 const install = (Vue, opts = {}) => {
     Vue.use(Loading.directive);
+    Vue.prototype.$loading = Loading.service;
     Vue.prototype.$message = Message;
     Vue.prototype.$msgbox = MessageBox;
 }
