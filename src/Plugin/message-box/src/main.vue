@@ -1,5 +1,5 @@
 <template>
-	<transition name="msgbox-fade">
+	<transition name="msgbox-scale">
 		<div
 			class="message-box__wrapper"
 			tabindex="-1"
@@ -12,7 +12,7 @@
 			<div :class="['message-box',customClass,center&&'t-c']">
 				<div class="message-box__header" v-if="title!=null">
 					<div class="message-box__title">
-						<span>{{title}}</span>
+						<h2>{{title}}</h2>
 					</div>
 				</div>
 				<div class="message-box__content">
@@ -145,7 +145,7 @@ export default {
 	text-align: center;
 	width: 100%;
 	height: 100%;
-	font-size: 20px;
+	font-size: 22px;
 	&:after {
 		display: inline-block;
 		content: "";
@@ -154,10 +154,16 @@ export default {
 		vertical-align: middle;
 	}
 	.message-box {
+		border-radius: 13px;
+		box-shadow: none;
+		overflow: hidden;
 		display: inline-block;
 		vertical-align: middle;
-		border-radius: 10px;
-		width: 80%;
+		width: auto;
+		min-width: 250px;
+		max-width: 270px;
+		min-height: auto;
+		max-height: 90%;
 		backdrop-filter: saturate(180%) blur(20px);
 		background-color: rgba(255, 255, 255, 0.72);
 		-webkit-transition-property: background-color, -webkit-backdrop-filter;
@@ -170,24 +176,29 @@ export default {
 			opacity 0.5s cubic-bezier(0.28, 0.11, 0.32, 1);
 		user-select: none;
 		.message-box__header {
-			padding: 20px 30px 10px;
+			padding: 12px 16px 7px 16px;
 			.message-box__title {
-				padding-left: 0;
-				margin-bottom: 0;
-				color: #303133;
-				font-weight: 700;
+				h2 {
+					color: #000;
+					margin-top: 8px;
+					font-size: 17px;
+					font-weight: 600;
+				}
 			}
 		}
 		.message-box__content {
-			font-size: 16px;
-			margin-bottom: 20px;
+			font-size: 13px;
+			color: #000;
+			max-height: 240px;
+			overflow-y: auto;
+      overscroll-behavior-y: contain;
 			.message-box__container {
-				padding: 0 15px;
+				padding:  0 16px 21px 16px;
 			}
 		}
 		.message-box__btns {
-			line-height: 40px;
-			font-size: 16px;
+			line-height: 44px;
+			font-size: 17px;
 			&[button-row="false"] {
 				display: unset;
 				button {
@@ -218,18 +229,21 @@ export default {
 				}
 			}
 			.btns-cancel {
-				color: rgba(105, 105, 105, 0.5);
+				font-weight: 500;
+				color: #3880ff;
+				font-size: 17px;
 			}
 			.btns-confirm {
-				font-weight: 600;
-				color: rgb(48, 103, 253);
+				color: #3880ff;
+				font-size: 17px;
+				font-weight: 700;
 			}
 		}
 	}
 }
 </style>
 <style type="text/css">
-	.v-modal {
+.v-modal {
 	position: fixed;
 	left: 0;
 	top: 0;
