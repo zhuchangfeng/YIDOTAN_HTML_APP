@@ -18,10 +18,10 @@ main,summary,details {display: block}
 audio,canvas,video,progress {vertical-align: baseline}
 button {background: none;border: 0;box-sizing: content-box;color: inherit;cursor: pointer;font: inherit;line-height: inherit;overflow: visible;vertical-align: inherit}
 button:disabled {cursor: default}
-img { border:0;display: block; width: 100%;height: 100%; }
+img { border:0;display: block; width: 100%;height: 100%; max-width: 100%}
 button, input, select, textarea { font-size:100%; }
 table { border-collapse:collapse; border-spacing:0; }
-input,button {-webkit-appearance: none;-moz-appearance: none;appearance: none;background: none;}
+input:not("[type=checkbox]"),button {-webkit-appearance: none;-moz-appearance: none;appearance: none;background: none;}
 *{
     -webkit-overflow-scrolling: touch;
 }
@@ -33,7 +33,7 @@ html{
 
 html,body{
     // font-family: Microsoft YaHei,tahoma,arial,Hiragino Sans GB,sans-serif;
-    font-family: "SF Pro SC","SF Pro Text","SF Pro Icons","PingFang SC","Helvetica Neue","Helvetica","Arial",sans-serif;
+    font-family: -apple-system,BlinkMacSystemFont,"Helvetica Neue","Roboto",sans-serif;
     // font-family: -apple-system,BlinkMacSystemFont,Source Sans Pro,Helvetica Neue,Arial,sans-serif;
     height: 100%;
     width: 100%;
