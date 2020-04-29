@@ -267,5 +267,21 @@ export function randomColor(opacity = 0.3) {
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
     const a = /^0\.[1-9]\d*$/.test(opacity) ? opacity : 1
-    return "rgb(" + r + ',' + g + ',' + b + ',' + opacity + ")";
+    return "rgba(" + r + ',' + g + ',' + b + ',' + opacity + ")";
+};
+/**
+ * @description
+ * 获取随机数 
+ * @param {number} min  {number} max
+ * @returns {number} 返回判断结果
+ * @export
+ * @example
+ *  random(2,5) ===> 5
+ */
+export function random(min, max) {
+    if (max == null) {
+        max = min;
+        min = 0;
+    }
+    return min + Math.floor(Math.random() * (max - min + 1));
 }
