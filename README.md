@@ -1,6 +1,6 @@
-# YIDOTAN_HTML_APP
+# i18n
 
-> this is a YIDOTAN_HTML_APP demo
+> this is a i18n demo
 
 ## Build Setup
 

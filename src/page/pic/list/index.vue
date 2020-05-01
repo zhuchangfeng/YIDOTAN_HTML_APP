@@ -1,5 +1,5 @@
 <template>
-  <div id="picList" v-loading.body="isLoading">
+  <div id="picList">
     <div class="choice borderBottom1">
       <div class="choice-top">
         <div class="choice-type" v-for="(item,index) in tags" :key="index">
@@ -110,13 +110,12 @@
 
 <script>
 import { getAlbum, getActivitetags } from "@/api/api.js";
-import { randomColor, random } from "@/Plugin/utils/index.js";
+import { randomColor } from "@/Plugin/utils/index.js";
 import { getStyle, setStyle } from "@/Plugin/dom/dom.js";
 export default {
   name: "pic-list",
   data() {
     return {
-      isLoading: true, //是否在加载中
       tags: [],
       pics: [],
       order: {
@@ -153,8 +152,7 @@ export default {
         // 奇数
         maxHeight: 0,
         lastDom: null
-      },
-      updateLength: 0
+      }
     };
   },
   watch: {
@@ -178,16 +176,24 @@ export default {
       immediate: true, //是否初始化执行
       deep: false //是否深度监听
     },
-    pics(newVal) {
+    pics() {
       this.$nextTick(() => {
         if (Object.keys(this.$refs).length > 0) {
+          let refsArr = this.$refs.pic;
+          const page_size = 20;
           const page = this.page - 1 > 1 ? this.page - 1 : 1;
-          let result = this.$refs.pic.slice(-this.updateLength);
-          let scenes = this.$refs.scenes.slice(-this.updateLength);
+          let result = {};
+          let scenes = {};
           // 默认列数
           const col = 2;
-          if (this._getType(result) == "array") {
-            result.forEach((item, index) => {
+          for (let i = 0, j = refsArr.length; i < j; i += page_size) {
+            result[Object.keys(result).length + 1] = refsArr.slice(
+              i,
+              i + page_size
+            );
+          }
+          if (this._getType(result[page]) == "array") {
+            result[page].forEach((item, index) => {
               const img_h = item.getAttribute("img_h");
               const img_w = item.getAttribute("img_w");
               let width = getStyle(item, "width");
@@ -199,32 +205,32 @@ export default {
               }
             });
           }
-          if (this._getType(scenes) == "array") {
+          for (let i = 0, j = this.$refs.scenes.length; i < j; i += page_size) {
+            scenes[Object.keys(scenes).length + 1] = this.$refs.scenes.slice(
+              i,
+              i + page_size
+            );
+          }
+          if (this._getType(scenes[page]) == "array") {
             if (page == 1) {
               this.even.maxHeight = 0;
               this.odd.maxHeight = 0;
-              this.even.lastDom = null;
-              this.odd.lastDom = null;
             }
-            scenes.forEach((item, index) => {
-              // 奇数
+            scenes[page].forEach((item, index) => {
               if ((index + 1) % col) {
                 setStyle(item, "top", this.odd.maxHeight + "px");
-                setStyle(item, "left", "0px");
                 this.odd.lastDom = item;
                 this.odd.maxHeight += item.getClientRects()[0].height;
               } else {
                 // 偶数
-                const preScenes = scenes[
-                  index - 1 == -1 ? 0 : index - 1
-                ].getClientRects()[0].width;
+                const preScenes = scenes[page][index - 1].getClientRects()[0]
+                  .width;
                 setStyle(item, "left", preScenes + "px");
                 setStyle(item, "top", this.even.maxHeight + "px");
                 this.even.lastDom = item;
                 this.even.maxHeight += item.getClientRects()[0].height;
               }
             });
-            // even:偶数  odd：基数
             if (this.even.maxHeight > this.odd.maxHeight) {
               const lastDOMRectList = this.even.lastDom.getClientRects()[0];
               if (
@@ -296,16 +302,12 @@ export default {
           page: this.page
         }
       });
-      if (this.isLoading) {
-        this.isLoading = false;
-      }
       if (data.success_code == 200) {
         if (this._getType(data) == "object") {
           if (data.data.hasOwnProperty("pics")) {
             const { pics } = data.data;
             if (this._getType(pics) == "array") {
               if (pics.length > 0) {
-                this.updateLength = pics.length;
                 this.page++;
                 if (add) {
                   this.pics = [...this.pics, ...pics];
@@ -542,18 +544,28 @@ export default {
     }
   }
   #scenes {
+    // display: flex;
+    // flex-wrap: wrap;
+    // column-count: 2;
     position: relative;
     font-size: 12px;
     .scenes-padding {
       position: absolute;
       padding: 0 4.167px 4.167px 4.167px;
+      // margin-bottom: 4.167px;
       width: 50%;
+      // height: max-content;
       .scenes-item {
-        border-top-left-radius: 4.16672px;
-        border-top-right-radius: 4.16672px;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-        overflow: hidden;
+        // width: 100%;
+        // flex-grow: 1;
+        // break-inside: avoid;
+        img {
+          border-top-left-radius: 4.16672px;
+          border-top-right-radius: 4.16672px;
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+          overflow: hidden;
+        }
         .scenes-bottom {
           .scenes-title {
             padding: 10.417px 8.333px 4.167px;
