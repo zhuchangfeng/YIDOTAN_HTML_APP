@@ -78,4 +78,10 @@ export const getActivitetags = (obj) => request({
     method: "GET",
     url: "/photo/activitetags",
     ...createObj(obj)
-})
+});
+
+export const getAlbumDetail = (obj) => request({
+    method: "GET",
+    url: '/album/detail',
+    ...createObj(obj)
+});
