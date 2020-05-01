@@ -1,4 +1,4 @@
-# i18n
+# YIDOTAN_HTML_APP
 
 > this is a YIDOTAN_HTML_APP demo
 
