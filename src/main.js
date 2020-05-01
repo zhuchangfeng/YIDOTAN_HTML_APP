@@ -8,7 +8,7 @@ import store from './store/index';
 import ('./style/public.less');
 import ('./style/base.less');
 import ('./style/main.less');
-import { Popup, Cell, NumberKeyboard, Button } from 'vant';
+import { Popup, Cell, NumberKeyboard, Button, Swipe, SwipeItem } from 'vant';
 import _ from 'lodash';
 import VRFCT from './Plugin/VRFCT';
 import VueLazyload from 'vue-lazyload';
@@ -16,7 +16,7 @@ import Plugin from "./Plugin/index.js"
 import 'font-awesome/css/font-awesome.min.css';
 Vue.config.productionTip = false;
 Vue.prototype._ = _;
-Vue.use(Popup).use(Cell).use(NumberKeyboard).use(Button);
+Vue.use(Popup).use(Cell).use(NumberKeyboard).use(Button).use(Swipe).use(SwipeItem);
 Vue.use(VRFCT);
 Vue.use(Plugin);
 Vue.use(VueLazyload, {
