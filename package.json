@@ -1,7 +1,7 @@
 {
     "name": "i18n",
     "version": "1.0.0",
-    "description": "this is a i18n demo",
+    "description": "this is a yidoutang h5",
     "author": "Felix.zhu",
     "private": true,
     "scripts": {
@@ -20,17 +20,18 @@
         "vue-router": "^3.0.1"
     },
     "devDependencies": {
+        "@babel/core": "^7.9.6",
+        "@babel/plugin-proposal-optional-chaining": "^7.9.0",
+        "@babel/plugin-transform-runtime": "^7.9.6",
+        "@babel/polyfill": "^7.8.7",
+        "@babel/preset-env": "^7.9.6",
         "autoprefixer": "^7.1.2",
-        "babel-core": "^6.22.1",
+        "babel-core": "^7.0.0-bridge.0",
         "babel-helper-vue-jsx-merge-props": "^2.0.3",
         "babel-loader": "^7.1.1",
         "babel-plugin-import": "^1.12.2",
         "babel-plugin-syntax-jsx": "^6.18.0",
-        "babel-plugin-transform-runtime": "^6.22.0",
         "babel-plugin-transform-vue-jsx": "^3.5.0",
-        "babel-polyfill": "^6.26.0",
-        "babel-preset-env": "^1.3.2",
-        "babel-preset-stage-2": "^6.22.0",
         "chalk": "^2.0.1",
         "copy-webpack-plugin": "^4.0.1",
         "css-loader": "^0.28.0",
