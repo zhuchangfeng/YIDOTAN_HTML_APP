@@ -190,6 +190,29 @@ export default [{
         }
     },
     {
+        path: "/pic/slice",
+        component: resolve => require(['@/page/pic/slide/index.vue'], resolve),
+        name: "pic-slice",
+        meta: {
+            // keepAlive: true, // 不需要被缓存
+            Tbshow: false, //是否显示tabbar
+            TopTitlehide: false, //是否隐藏标题,
+        },
+        children: [{
+            path: '/pic/slice/user/:id',
+            component: resolve => require(['@/page/pic/slide/user/_id.vue'], resolve),
+            name: "pic-slide-user-id",
+            beforeEnter: (to, from, next) => {
+                const { id } = to.params;
+                if (/^[0-9]*$/.test(id)) {
+                    next();
+                } else {
+                    next("/404");
+                }
+            }
+        }]
+    },
+    {
         path: "*",
         redirect: "/404"
     }
