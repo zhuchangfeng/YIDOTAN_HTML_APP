@@ -85,3 +85,9 @@ export const getAlbumDetail = (obj) => request({
     url: '/album/detail',
     ...createObj(obj)
 });
+
+export const getSimilar = (obj) => request({
+    method: "GET",
+    url: '/photo/getsimilar',
+    ...createObj(obj)
+});
