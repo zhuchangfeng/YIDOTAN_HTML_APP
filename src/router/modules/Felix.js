@@ -184,19 +184,28 @@ export default [{
         component: resolve => require(['@/page/pic/list/index.vue'], resolve),
         name: "pic-list",
         meta: {
-            // keepAlive: true, // 不需要被缓存
+            keepAlive: true, // 不需要被缓存
             Tbshow: false, //是否显示tabbar
             TopTitlehide: false, //是否隐藏标题,
         }
     },
     {
-        path: "/pic/slice",
+        path: "/pic/slice/:id/:space/:style/:part/:soft/:order/:sharing",
         component: resolve => require(['@/page/pic/slide/index.vue'], resolve),
         name: "pic-slice",
         meta: {
             // keepAlive: true, // 不需要被缓存
             Tbshow: false, //是否显示tabbar
             TopTitlehide: false, //是否隐藏标题,
+        },
+        redirect: to => "/pic/slice/user/" + to.params.id,
+        beforeEnter: (to, from, next) => {
+            const { id } = to.params;
+            if (/^[0-9]*$/.test(id)) {
+                next();
+            } else {
+                next("/404");
+            }
         },
         children: [{
             path: '/pic/slice/user/:id',
