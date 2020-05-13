@@ -12,10 +12,10 @@ module.exports = {
                     ]
                 }
             }
-        ]
+        ],
+        ["@vue/babel-preset-jsx"]
     ],
     "plugins": [
-        "transform-vue-jsx",
         "@babel/plugin-transform-runtime",
         "@babel/plugin-proposal-optional-chaining", [
             "import",

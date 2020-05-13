@@ -24,7 +24,13 @@ Vue.use(VueLazyload, {
     // error: 'dist/error.png',
     // loading: 'dist/loading.gif',
     attempt: 3,
-    listenEvents: ['scroll'], //['scroll','wheel','mousewheel','resize','animationend','transitionend','touchmove']
+    // listenEvents: ['scroll'], //['scroll','wheel','mousewheel','resize','animationend','transitionend','touchmove']
+    observer: true,
+    // optional
+    observerOptions: {
+        rootMargin: '0px',
+        threshold: 0.1
+    }
 });
 
 Vue.component('Profile', () =>

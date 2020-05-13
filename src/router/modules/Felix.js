@@ -19,6 +19,26 @@ export default [{
         },
     },
     {
+        path: '/Home1',
+        name: 'Home1',
+        component: resolve => require(['@/components/Home/Home1.vue'], resolve),
+        meta: {
+            // keepAlive: true, // 不需要被缓存
+            Tbshow: true, //是否显示tabbar
+            TopTitlehide: true, //是否隐藏标题
+        },
+    },
+    {
+        path: '/jsx',
+        name: 'jsx',
+        component: resolve => require(['@/components/jsx/jsx.vue'], resolve),
+        meta: {
+            // keepAlive: true, // 不需要被缓存
+            Tbshow: true, //是否显示tabbar
+            TopTitlehide: true, //是否隐藏标题
+        },
+    },
+    {
         path: '/Home2',
         name: 'Home2',
         component: resolve => require(['@/page/demo/Home2.vue'], resolve),
@@ -48,16 +68,16 @@ export default [{
             TopTitlehide: true, //是否隐藏标题
         }
     },
-    {
-        path: '/test',
-        name: 'test',
-        component: resolve => require(['@/page/demo/test.vue'], resolve),
-        meta: {
-            // keepAlive: true, // 不需要被缓存
-            Tbshow: false, //是否显示tabbar
-            TopTitlehide: true, //是否隐藏标题
-        }
-    },
+    // {
+    //     path: '/test',
+    //     name: 'test',
+    //     component: resolve => require(['@/page/demo/test.vue'], resolve),
+    //     meta: {
+    //         // keepAlive: true, // 不需要被缓存
+    //         Tbshow: false, //是否显示tabbar
+    //         TopTitlehide: true, //是否隐藏标题
+    //     }
+    // },
     {
         path: '/dome',
         name: 'dome',
@@ -184,19 +204,28 @@ export default [{
         component: resolve => require(['@/page/pic/list/index.vue'], resolve),
         name: "pic-list",
         meta: {
-            // keepAlive: true, // 不需要被缓存
+            keepAlive: true, // 不需要被缓存
             Tbshow: false, //是否显示tabbar
             TopTitlehide: false, //是否隐藏标题,
         }
     },
     {
-        path: "/pic/slice",
+        path: "/pic/slice/:id/:space/:style/:part/:soft/:order/:sharing",
         component: resolve => require(['@/page/pic/slide/index.vue'], resolve),
         name: "pic-slice",
         meta: {
             // keepAlive: true, // 不需要被缓存
             Tbshow: false, //是否显示tabbar
             TopTitlehide: false, //是否隐藏标题,
+        },
+        redirect: to => "/pic/slice/user/" + to.params.id,
+        beforeEnter: (to, from, next) => {
+            const { id } = to.params;
+            if (/^[0-9]*$/.test(id)) {
+                next();
+            } else {
+                next("/404");
+            }
         },
         children: [{
             path: '/pic/slice/user/:id',
@@ -211,6 +240,16 @@ export default [{
                 }
             }
         }]
+    },
+    {
+        path: "/case/list/:size/:area/:budget/:style/:type/:order",
+        name: "case-list",
+        component: resolve => require(['@/page/case/list.vue'], resolve),
+        meta: {
+            keepAlive: true, // 不需要被缓存
+            Tbshow: false, //是否显示tabbar
+            TopTitlehide: false, //是否隐藏标题,
+        }
     },
     {
         path: "*",

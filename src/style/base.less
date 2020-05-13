@@ -34,12 +34,12 @@
 }
 
 [lazy="loaded"] {
-  opacity: 1 !important;
+  filter: blur(0px) !important;
 }
 
 .lazy {
-  opacity: 0;
-  transition: opacity .3s ease;
+  filter: blur(4px);
+  transition: filter .3s ease-in;
 }
 
 .loading-parent--relative {
