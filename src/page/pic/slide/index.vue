@@ -12,9 +12,9 @@
 				<a href="https://a.app.qq.com/o/simple.jsp?pkgname=com.yidoutang.app">下载</a>
 			</div>
 		</div>
-    <div class="slide-user">
-      <router-view></router-view>
-    </div>
+		<div class="slide-user">
+			<router-view></router-view>
+		</div>
 		<div class="slide-open">App 内打开</div>
 	</div>
 </template>
