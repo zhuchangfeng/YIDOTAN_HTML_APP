@@ -1,13 +1,4 @@
-<template>
-	<div class="TitleBar">
-		<div class="callBack" @click="callBack">
-			<img src="../../../static/image/arrows.svg" alt="返回上一层" />
-		</div>
-		<span class="title">{{titleValue}}</span>
-	</div>
-</template>
-
-<script>
+<script type="text/jsx">
 export default {
 	props: {
 		titleValue: {
@@ -20,6 +11,16 @@ export default {
 		callBack() {
 			window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
 		}
+	},
+	render(h) {
+		return (
+			<div class="TitleBar">
+				<div class="callBack" on-click={this.callBack}>
+					<img src="/static/image/arrows.svg" alt="返回上一层" />
+				</div>
+				<span class="title">{this.titleValue}</span>
+			</div>
+		);
 	}
 };
 </script>
