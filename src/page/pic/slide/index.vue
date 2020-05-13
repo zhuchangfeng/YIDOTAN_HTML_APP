@@ -75,7 +75,7 @@ export default {};
 		width: 110.14px;
 		line-height: 38.81px;
 		background-color: #f8b434;
-		font-size: 14px;
+		font-size: 13.5417px;
 		text-align: center;
 		position: fixed;
 		bottom: 41.6667px;
