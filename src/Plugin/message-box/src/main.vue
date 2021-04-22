@@ -42,97 +42,97 @@
 </template>
 
 <script>
-import { addClass, setStyle } from "../../dom/dom";
+import { addClass, setStyle } from '../../dom/dom'
 export default {
 	data() {
 		return {
 			// 文字是否居中
 			center: true,
 			// 标题
-			title: "",
+			title: '',
 			// 提示内容
-			message: "",
+			message: '',
 			// 自定义类
-			customClass: "",
+			customClass: '',
 			// 是否显示取消按钮
 			showCancelButton: false,
 			// 取消按钮类
-			cancelButtonClass: "",
+			cancelButtonClass: '',
 			// 取消按钮文字
-			cancelButtonText: "",
+			cancelButtonText: '',
 			// 是否显示确定按钮
 			showConfirmButton: true,
 			// 确定按钮类
-			confirmButtonClass: "",
+			confirmButtonClass: '',
 			// 确定按钮文字
-			confirmButtonText: "",
+			confirmButtonText: '',
 			// z-index
 			zIndex: new Date().getFullYear(),
 			// 回调函数
 			callback: null,
 			// 提示框类型
-			type: "",
+			type: '',
 			// 是否按钮显示一行
 			rowButton: true,
 			// 提交方式
-			action: "",
+			action: '',
 			uid: new Date().getFullYear(),
 			visible: false
-		};
+		}
 	},
 	methods: {
 		getSafeClose() {
-			const currentId = this.uid;
+			const currentId = this.uid
 			return () => {
 				this.$nextTick(() => {
-					if (currentId === this.uid) this.doClose();
-				});
-			};
+					if (currentId === this.uid) this.doClose()
+				})
+			}
 		},
 		handleAction(action) {
-			this.action = action;
-			if (typeof this.beforeClose === "function") {
-				this.close = this.getSafeClose();
-				this.beforeClose(action, this, this.close);
+			this.action = action
+			if (typeof this.beforeClose === 'function') {
+				this.close = this.getSafeClose()
+				this.beforeClose(action, this, this.close)
 			} else {
-				this.doClose();
+				this.doClose()
 			}
 		},
 		doClose() {
-			if (!this.visible) return;
-			this.visible = false;
-			this._closing = true;
+			if (!this.visible) return
+			this.visible = false
+			this._closing = true
 			setTimeout(() => {
-				if (this.action) this.callback(this.action, this);
-			});
+				if (this.action) this.callback(this.action, this)
+			})
 		}
 	},
 	computed: {
 		messageZindex() {
 			return {
-				"z-index": this.zIndex
-			};
+				'z-index': this.zIndex
+			}
 		},
 		modeZindex() {
 			return {
-				"z-index": this.zIndex - 1
-			};
+				'z-index': this.zIndex - 1
+			}
 		}
 	},
 	watch: {
 		visible(nVisible) {
-			let created = document.createElement("div");
-			addClass(created, "v-modal");
-			created.setAttribute("tabindex", 0);
-			setStyle(created, this.modeZindex);
+			const created = document.createElement('div')
+			addClass(created, 'v-modal')
+			created.setAttribute('tabindex', 0)
+			setStyle(created, this.modeZindex)
 			if (nVisible) {
-				document.body.append(created);
+				document.body.append(created)
 			} else {
-				document.querySelector(".v-modal").remove();
+				document.querySelector('.v-modal').remove()
 			}
 		}
 	}
-};
+}
 </script>
 
 <style lang="less" scoped>

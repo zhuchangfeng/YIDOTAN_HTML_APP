@@ -1,5 +1,5 @@
 import demo from '../modules/Jack/demo'
 const Jack = {
-    ...demo
+	...demo
 }
-export default Jack;
+export default Jack

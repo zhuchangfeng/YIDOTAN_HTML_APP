@@ -1,5 +1,5 @@
 import demo from '../modules/Felix/demo'
 const Felix = {
-    ...demo
+	...demo
 }
-export default Felix;
+export default Felix

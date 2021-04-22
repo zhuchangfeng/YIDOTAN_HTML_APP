@@ -12,33 +12,33 @@
 </template>
 
 <script>
-import { importComponents } from "@/Plugin/Plugins";
-import { mixinTest } from "@/mixins/mixinTest";
-import { Dialog } from "vant";
+import { importComponents } from '@/Plugin/Plugins'
+import { mixinTest } from '@/mixins/mixinTest'
+import { Dialog } from 'vant'
 export default {
-  mixins: [mixinTest],
-  data() {
-    return {
-      show: false
-    };
-  },
-  methods: {
-    test: function() {
-      console.log("object");
-    },
-    showPopup() {
-      this.show = true;
-    },
-  },
-  components: {
-    ...importComponents("Home"),
-    [Dialog.Component.name]: Dialog.Component
-  },
-  mounted() {
-    console.log(importComponents("Home"));
-    console.log(this.$children);
-  }
-};
+	mixins: [mixinTest],
+	data() {
+		return {
+			show: false
+		}
+	},
+	methods: {
+		test: function() {
+			console.log('object')
+		},
+		showPopup() {
+			this.show = true
+		}
+	},
+	components: {
+		...importComponents('Home'),
+		[Dialog.Component.name]: Dialog.Component
+	},
+	mounted() {
+		console.log(importComponents('Home'))
+		console.log(this.$children)
+	}
+}
 </script>
 
 <style lang="less">

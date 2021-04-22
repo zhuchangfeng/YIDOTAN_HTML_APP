@@ -1,15 +1,15 @@
 <template>
   <div class="comment">
-    <div class="comment-avatar">
-      <img  v-lazy="comment.user_pic" alt="用户头像" class="lazy" />
+    <div class="comment__avatar">
+      <img v-lazy="comment.user_pic" alt="用户头像" class="lazy" />
     </div>
-    <div class="comment-container">
-      <div class="comment-name">{{comment.user_name}}</div>
-      <div class="comment-time">{{comment.created}}</div>
-      <div class="comment-content">{{comment.content}}</div>
+    <div class="comment__container">
+      <div class="comment__container--name">{{ comment.user_name }}</div>
+      <div class="comment__container--time">{{ comment.created }}</div>
+      <div class="comment__container--content">{{ comment.content }}</div>
     </div>
-    <div class="comment-like">
-      <span>{{comment.zan_num}}</span>
+    <div class="comment__like">
+      <span>{{ comment.zan_num }}</span>
       <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
     </div>
   </div>
@@ -17,12 +17,12 @@
 
 <script>
 export default {
-  props: {
-    comment: {
-      type: Object,
-    }
-  }
-};
+	props: {
+		comment: {
+			type: Object
+		}
+	}
+}
 </script>
 
 <style lang="less" scoped>
@@ -30,7 +30,12 @@ export default {
   display: flex;
   padding: 17.78px 0 0 46.785px;
   position: relative;
-  .comment-avatar {
+  &:last-child {
+    .comment-container {
+      border-bottom: none;
+    }
+  }
+  &__avatar {
     width: 31.25px;
     height: 31.25px;
     border-radius: 50%;
@@ -42,20 +47,20 @@ export default {
     left: 0;
     top: 17.78px;
   }
-  .comment-container {
+  &__container {
     padding-bottom: 15.625px;
     width: 100%;
     border-bottom: 1px solid #e8e9eb;
-    .comment-name {
+    &--name {
       font-size: 13px;
       color: #666;
     }
-    .comment-time {
+    &--time {
       font-size: 12px;
       color: #999;
       margin-top: 4.167px 0;
     }
-    .comment-content {
+    &--content {
       font-size: 13.5px;
       line-height: 20.834px;
       margin-top: 11.4px;
@@ -64,7 +69,7 @@ export default {
       word-wrap: break-word;
     }
   }
-  .comment-like {
+  &__like {
     color: #999;
     font-size: 13px;
     line-height: 16.66px;

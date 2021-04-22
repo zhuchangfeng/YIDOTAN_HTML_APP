@@ -1,8 +1,8 @@
 <template>
 	<div class="related border1">
-		<div class="related-image lazy" v-lazy:background-image="related.cover"></div>
-		<div class="related-subject">{{related.subject}}</div>
-		<div class="related-summary">{{related.summary}}</div>
+		<div class="related__image lazy" v-lazy:background-image="related.cover"></div>
+		<div class="related__subject">{{related.subject}}</div>
+		<div class="related__summary">{{related.summary}}</div>
 	</div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
 			required: false
 		}
 	}
-};
+}
 </script>
 
 <style lang="less" scoped>
@@ -31,7 +31,7 @@ export default {
 	&.border1 {
 		border-bottom: 1px solid #e6e6e6;
 	}
-	.related-image {
+	&__image {
 		height: 201.031px;
 		background-color: #eee;
 		border-radius: 3.12504px;
@@ -39,7 +39,7 @@ export default {
 		background-repeat: no-repeat;
 		background-size: cover;
 	}
-	.related-subject {
+	&__subject {
 		.n-ellipsis(2);
 		font-size: 17.7083px;
 		color: #333;
@@ -47,7 +47,7 @@ export default {
 		margin: 8.33332px 0 4.16672px;
 		line-height: 26.0416px;
 	}
-	.related-summary {
+	&__summary {
 		.n-ellipsis(2);
 		font-size: 14.5833px;
 		line-height: 22.9167px;

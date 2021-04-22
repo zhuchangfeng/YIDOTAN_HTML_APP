@@ -22,39 +22,39 @@
 
 <script>
 export default {
-  data() {
-    return {
-      defaultIndex: 0,
-      menuData: [
-        {
-          name: "个人中心"
-        },
-        {
-          name: "我的信息"
-        },
-        {
-          name: "我的订单"
-        },
-        {
-          name: "我的卡券"
-        },
-        {
-          name: "常用乘客"
-        },
-        {
-          name: "重要通知"
-        }
-      ]
-    };
-  },
-  methods: {
-      changOne(index){
-          if(index!==this.defaultIndex){
-          this.defaultIndex=index;
-          }
-      },
-  },
-};
+	data() {
+		return {
+			defaultIndex: 0,
+			menuData: [
+				{
+					name: '个人中心'
+				},
+				{
+					name: '我的信息'
+				},
+				{
+					name: '我的订单'
+				},
+				{
+					name: '我的卡券'
+				},
+				{
+					name: '常用乘客'
+				},
+				{
+					name: '重要通知'
+				}
+			]
+		}
+	},
+	methods: {
+		changOne(index) {
+			if (index !== this.defaultIndex) {
+				this.defaultIndex = index
+			}
+		}
+	}
+}
 </script>
 
 <style lang="less" scoped>

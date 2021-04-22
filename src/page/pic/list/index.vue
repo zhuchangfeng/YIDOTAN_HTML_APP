@@ -2,45 +2,71 @@
 	<div id="picList" v-loading.body="isLoading">
 		<div class="choice borderBottom1">
 			<div class="choice-top">
-				<div class="choice-type" v-for="(item,index) in tags" :key="index">
+				<div class="choice-type" v-for="(item, index) in tags" :key="index">
 					<div
-						:class="['choice-button','fourColor3',selectArr[item.key]&&selectArr[item.key]!='0'?'hover':'']"
+						:class="[
+							'choice-button',
+							'fourColor3',
+							selectArr[item.key] && selectArr[item.key] != '0' ? 'hover' : '',
+						]"
 						@click="selectKey(item.key)"
 					>
-						{{item.name}}
+						{{ item.name }}
 						<i class="fa fa-sort-desc" aria-hidden="true"></i>
 					</div>
-					<div class="choice-box borderBottom" v-show="item.key==keyName">
-						<div class="choice-groups" v-for="(v,k) in item.groups" :key="k">
-							<div class="group-title">{{v.name}}</div>
+					<div class="choice-box borderBottom" v-show="item.key == keyName">
+						<div class="choice-groups" v-for="(v, k) in item.groups" :key="k">
+							<div class="group-title">{{ v.name }}</div>
 							<div class="tags-box">
 								<div
-									:class="['tags-item','fourColor3',selectArr[item.key]==t.value?'hover':'']"
-									v-for="(t,g) in v.sonTags"
+									:class="[
+										'tags-item',
+										'fourColor3',
+										selectArr[item.key] == t.value ? 'hover' : '',
+									]"
+									v-for="(t, g) in v.sonTags"
 									:key="g"
-									@click="selectOne(item.key,t.value)"
-								>{{t.value}}</div>
+									@click="selectOne(item.key, t.value)"
+								>
+									{{ t.value }}
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
 				<div
-					:class="['choice-order','fourColor3',orderObject.isopen?'active':'']"
-					@click="keyName=null;orderObject.isopen=!(orderObject.isopen)"
+					:class="[
+						'choice-order',
+						'fourColor3',
+						orderObject.isopen ? 'active' : '',
+					]"
+					@click="
+						keyName = null;
+						orderObject.isopen = !orderObject.isopen;
+					"
 				>
 					<i class="fa fa-ellipsis-h" aria-hidden="true"></i>
 				</div>
 
-				<div class="order-box borderBottom" v-if="order.sonTags.length>0" v-show="orderObject.isopen">
+				<div
+					class="order-box borderBottom"
+					v-if="order.sonTags.length > 0"
+					v-show="orderObject.isopen"
+				>
 					<div class="order-div borderBottom">
-						<span>{{order.name}}</span>
+						<span>{{ order.name }}</span>
 						<div
-							:class="['order-item',o.value==orderObject[order.key]?'fourColor3 hover':'']"
-							v-for="(o,s) in order.sonTags"
+							:class="[
+								'order-item',
+								o.value == orderObject[order.key] ? 'fourColor3 hover' : '',
+							]"
+							v-for="(o, s) in order.sonTags"
 							:key="s"
-							@click="orderSelect(order.key,o.value)"
-						>{{o.title}}</div>
+							@click="orderSelect(order.key, o.value)"
+						>
+							{{ o.title }}
+						</div>
 					</div>
 					<div class="order-div">
 						<input
@@ -55,15 +81,18 @@
 				</div>
 			</div>
 
-			<div class="choice-select borderTop" v-if="Object.keys(selectArr).length>0">
+			<div
+				class="choice-select borderTop"
+				v-if="Object.keys(selectArr).length > 0"
+			>
 				<div class="select-box">
 					<div
 						class="select-item"
-						v-for="(item,index) in selectArr"
+						v-for="(item, index) in selectArr"
 						:key="index"
 						@click="cancelArr(index)"
 					>
-						{{item}}
+						{{ item }}
 						<i class="fa fa-times" aria-hidden="true"></i>
 					</div>
 				</div>
@@ -71,77 +100,117 @@
 		</div>
 
 		<div id="scenes">
-			<div class="scenes-padding" v-for="(item,index) in pics" :key="index" ref="scenes">
-				<div class="scenes-item fourColor0">
+			<div
+				class="scenes-padding"
+				v-for="(item, index) in pics"
+				:key="index"
+				ref="scenes"
+			>
+				<router-link
+					class="scenes-item fourColor0"
+					:to="{
+						path:
+							'/pic/slice/' +
+							item.match_id +
+							'/' +
+							params.space +
+							'/' +
+							params.style +
+							'/' +
+							params.part +
+							'/' +
+							params.soft +
+							'/' +
+							params.order +
+							'/' +
+							params.sharing,
+					}"
+					exact
+				>
 					<div
 						class="scenes-pic"
-						:style="{backgroundColor:getColor()}"
 						:img_h="item.data.info.img_h"
 						:img_w="item.data.info.img_w"
 						ref="pic"
 					>
-						<img v-lazy="item.small_image" :alt="'背景图'+index" class="lazy" />
+						<img
+							v-lazy="item.small_image"
+							:alt="'背景图' + index"
+							class="lazy"
+						/>
+						<i class="fa fa-tag" aria-hidden="true" v-if="item.tag_jump"></i>
 					</div>
 					<div class="scenes-bottom">
-						<div class="scenes-title" v-if="item.case_title">{{item.case_title|handleText}}</div>
+						<div class="scenes-title" v-if="item.case_title">
+							{{ item.case_title | handleText }}
+						</div>
 						<div class="scenes-avatar">
-							<div class="avatar-img" :style="{backgroundColor:getColor()}">
-								<img v-lazy="item.user_pic" :alt="item.user_name" class="lazy" />
+							<div class="avatar-img">
+								<img
+									v-lazy="item.user_pic"
+									:alt="item.user_name"
+									class="lazy"
+								/>
 							</div>
-							<div class="avatar-name">{{item.user_name}}</div>
-							<div class="avatar-collect" v-if="item.favtimes>0">
+							<div class="avatar-name">{{ item.user_name }}</div>
+							<div class="avatar-collect" v-if="item.favtimes > 0">
 								<i class="fa fa-star" aria-hidden="true"></i>
-								{{item.favtimes}}
+								{{ item.favtimes }}
 							</div>
 						</div>
 					</div>
-				</div>
+				</router-link>
 			</div>
 		</div>
 		<div class="picList-more">
-			<div class="more-bd fourColor0" @click="getList(true)">{{loadingText}}</div>
+			<div
+				class="more-bd fourColor0"
+				@click="getList({ add: true, async: true })"
+			>
+				{{ loadingText }}
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import { getAlbum, getActivitetags } from "@/api/api.js";
-import { randomColor, random } from "@/Plugin/utils/index.js";
-import { getStyle, setStyle } from "@/Plugin/dom/dom.js";
+import { getAlbum, getActivitetags } from '@/api/api.js'
+import { getStyle, setStyle } from '@/Plugin/dom/dom.js'
 export default {
-	name: "pic-list",
+	name: 'PicList',
 	data() {
 		return {
-			isLoading: true, //是否在加载中
+			isLoading: true, // 是否在加载中
+			isMore: true, // 是否可以加载操作
 			tags: [],
 			pics: [],
 			order: {
 				group: false,
-				key: "order",
-				name: "排序",
+				key: 'order',
+				name: '排序',
 				sonTags: [
-					{ value: "0", title: "推荐" },
-					{ value: "1", title: "最新" },
-					{ value: "2", title: "最热" }
+					{ value: '0', title: '推荐' },
+					{ value: '1', title: '最新' },
+					{ value: '2', title: '最热' }
 				]
 			},
 			keyName: null,
 			selectArr: {
-				space: this.$route.params.space, //空间
-				style: this.$route.params.style, //风格
-				part: this.$route.params.part, //硬装
-				soft: this.$route.params.soft //软装
+				space: this.$route.params.space, // 空间
+				style: this.$route.params.style, // 风格
+				part: this.$route.params.part, // 硬装
+				soft: this.$route.params.soft // 软装
 			},
 			orderObject: {
-				order: this.$route.params.order, //排序
-				sharing: Number(this.$route.params.sharing), //有购物单
+				order: this.$route.params.order, // 排序
+				sharing: Number(this.$route.params.sharing), // 有购物单
 				isopen: false
 			},
 			params: this.$route.params,
 			page: 1,
-			loadingText: "",
+			loadingText: '',
 			even: {
-				//偶数
+				// 偶数
 				maxHeight: 0,
 				lastDom: null
 			},
@@ -151,260 +220,258 @@ export default {
 				lastDom: null
 			},
 			updateLength: 0
-		};
+		}
 	},
 	watch: {
 		selectArr: {
 			handler: function(newval) {
 				for (const key in newval) {
-					if (newval.hasOwnProperty(key)) {
-						const element = newval[key];
+					if (newval?.[key]) {
+						const element = newval[key]
 						if (!element) {
-							this.$delete(this.selectArr, key);
+							this.$delete(this.selectArr, key)
 						} else {
 							if (/^[0-9]*$/.test(element)) {
 								if (!Number(element)) {
-									this.$delete(this.selectArr, key);
+									this.$delete(this.selectArr, key)
 								}
 							}
 						}
 					}
 				}
 			},
-			immediate: true, //是否初始化执行
-			deep: false //是否深度监听
+			immediate: true, // 是否初始化执行
+			deep: false // 是否深度监听
 		},
 		pics(newVal) {
 			this.$nextTick(() => {
 				if (Object.keys(this.$refs).length > 0) {
-					const page = this.page - 1 > 1 ? this.page - 1 : 1;
-					let result = this.$refs.pic.slice(-this.updateLength);
-					let scenes = this.$refs.scenes.slice(-this.updateLength);
+					const page = this.page - 1 > 1 ? this.page - 1 : 1
+					const result = this.$refs.pic.slice(-this.updateLength)
+					const scenes = this.$refs.scenes.slice(-this.updateLength)
 					// 默认列数
-					const col = 2;
-					if (this._getType(result) == "array") {
+					const col = 2
+					if (this._getType(result) === 'array') {
 						result.forEach((item, index) => {
-							const img_h = item.getAttribute("img_h");
-							const img_w = item.getAttribute("img_w");
-							let width = getStyle(item, "width");
-							if (typeof width == "string") {
-								width = (img_h / img_w) * width.replace("px", "");
+							const img_h = item.getAttribute('img_h')
+							const img_w = item.getAttribute('img_w')
+							const width = getStyle(item, 'width')
+							if (typeof width === 'string') {
+								const height = (img_h / img_w) * width.replace('px', '')
 								if (img_h && img_w) {
-									setStyle(item, "height", width + "px");
+									setStyle(item, 'height', height + 'px')
 								}
 							}
-						});
+						})
 					}
-					if (this._getType(scenes) == "array") {
-						if (page == 1) {
-							this.even.maxHeight = 0;
-							this.odd.maxHeight = 0;
-							this.even.lastDom = null;
-							this.odd.lastDom = null;
+					if (this._getType(scenes) === 'array') {
+						if (page === 1) {
+							this.even.maxHeight = 0
+							this.odd.maxHeight = 0
+							this.even.lastDom = null
+							this.odd.lastDom = null
 						}
 						scenes.forEach((item, index) => {
 							// 奇数
-							if ((index+1) % col) {
-								setStyle(item, "top", this.odd.maxHeight + "px");
-								setStyle(item, "left", "0px");
-								this.odd.lastDom = item;
-								this.odd.maxHeight += item.getClientRects()[0].height;
+							if ((index + 1) % col) {
+								setStyle(item, 'top', this.odd.maxHeight + 'px')
+								setStyle(item, 'left', '0px')
+								this.odd.lastDom = item
+								this.odd.maxHeight += item.getClientRects()[0].height
 							} else {
 								// 偶数
 								const preScenes = scenes[
-									index - 1 == -1 ? 0 : index - 1
-								].getClientRects()[0].width;
-								setStyle(item, "left", preScenes + "px");
-								setStyle(item, "top", this.even.maxHeight + "px");
-								this.even.lastDom = item;
-								this.even.maxHeight += item.getClientRects()[0].height;
+									index - 1 === -1 ? 0 : index - 1
+								].getClientRects()[0].width
+								setStyle(item, 'left', preScenes + 'px')
+								setStyle(item, 'top', this.even.maxHeight + 'px')
+								this.even.lastDom = item
+								this.even.maxHeight += item.getClientRects()[0].height
 							}
-						});
+						})
 						// even:偶数  odd：基数
 						if (this.even.maxHeight >= this.odd.maxHeight) {
-              const lastDOMRectList = this.even.lastDom.getClientRects()[0];
+							const lastDOMRectList = this.even.lastDom.getClientRects()[0]
 							if (
 								this.odd.maxHeight + lastDOMRectList.height <
 								this.even.maxHeight
 							) {
-								setStyle(this.even.lastDom, "left", "0px");
-								setStyle(this.even.lastDom, "top", this.odd.maxHeight + "px");
+								setStyle(this.even.lastDom, 'left', '0px')
+								setStyle(this.even.lastDom, 'top', this.odd.maxHeight + 'px')
 								this.even.maxHeight =
-									this.even.maxHeight - lastDOMRectList.height;
+									this.even.maxHeight - lastDOMRectList.height
 								this.odd.maxHeight =
-									this.odd.maxHeight + lastDOMRectList.height;
+									this.odd.maxHeight + lastDOMRectList.height
 							}
 						} else {
-              const lastDOMRectList = this.odd.lastDom.getClientRects()[0];
+							const lastDOMRectList = this.odd.lastDom.getClientRects()[0]
 							if (
 								this.even.maxHeight + lastDOMRectList.height <
 								this.odd.maxHeight
 							) {
 								setStyle(
 									this.odd.lastDom,
-									"left",
-									lastDOMRectList.width + "px"
-								);
-								setStyle(this.odd.lastDom, "top", this.even.maxHeight + "px");
+									'left',
+									lastDOMRectList.width + 'px'
+								)
+								setStyle(this.odd.lastDom, 'top', this.even.maxHeight + 'px')
 								this.odd.maxHeight =
-									this.odd.maxHeight - lastDOMRectList.height;
+									this.odd.maxHeight - lastDOMRectList.height
 								this.even.maxHeight =
-									this.even.maxHeight + lastDOMRectList.height;
+									this.even.maxHeight + lastDOMRectList.height
 							}
 						}
-						const max = Math.max(this.even.maxHeight, this.odd.maxHeight);
-						setStyle(document.getElementById("scenes"), "height", max + "px");
+						const max = Math.max(this.even.maxHeight, this.odd.maxHeight)
+						setStyle(document.getElementById('scenes'), 'height', max + 'px')
 					}
 				}
-			});
+			})
 		}
 	},
 	methods: {
 		async getTages() {
-			const { data } = await getActivitetags({ params: this.params });
-			if (data.success_code == 200) {
-				if (this._getType(data) == "object") {
-					if (data.data.hasOwnProperty("tags")) {
-						const { tags } = data.data;
-						if (this._getType(tags) == "array") {
-							let group = tags.reduce((item, value) => {
-								if (value.group) {
-									item.push(value);
-								} else {
-									this.$set(this.order, "group", value.group);
-									this.$set(this.order, "key", value.key);
-									this.$set(this.order, "name", value.name);
-								}
-								return item;
-							}, []);
-							this.tags = group;
+			const { data } = await getActivitetags({ params: this.params })
+			if (data?.success_code === 200) {
+				const tags = data?.data?.tags
+				if (this._getType(tags) === 'array') {
+					const group = tags.reduce((item, value) => {
+						if (value.group) {
+							item.push(value)
+						} else {
+							this.$set(this.order, 'group', value.group)
+							this.$set(this.order, 'key', value.key)
+							this.$set(this.order, 'name', value.name)
 						}
-					}
+						return item
+					}, [])
+					this.tags = group
 				}
 			}
 		},
 		// 获取列表
-		async getList(add = false) {
-			this.loadingText = "加载中...";
+		async getList(obj = { add: false }) {
+			const asyncStatus = obj?.async
+			if (typeof asyncStatus !== 'undefined') {
+				if (asyncStatus && !this.isMore) return
+				this.isMore = false
+			}
+			this.loadingText = '加载中...'
 			const { data } = await getAlbum({
 				params: {
 					...this.params,
-					page: this.page
+					page: obj?.page ? obj.page : this.page
 				}
-			});
+			})
 			if (this.isLoading) {
-				this.isLoading = false;
+				this.isLoading = false
 			}
-			if (data.success_code == 200) {
-				if (this._getType(data) == "object") {
-					console.log(data?.data?.pics);
-					if (data.data.hasOwnProperty("pics")) {
-						const { pics } = data.data;
-						if (this._getType(pics) == "array") {
-							if (pics.length > 0) {
-								this.updateLength = pics.length;
-								this.page++;
-								if (add) {
-									this.pics = [...this.pics, ...pics];
-								} else {
-									this.pics = [...pics];
-								}
-								this.loadingText = "加载更多";
-							} else {
-								this.loadingText = "加载完毕";
+			if (data?.success_code === 200) {
+				const pics = data?.data?.pics
+				if (this._getType(pics) === 'array') {
+					if (pics.length > 0) {
+						this.updateLength = pics.length
+						this.page = obj?.page ? obj.page + 1 : this.page + 1
+						if (obj?.add) {
+							this.pics = [...this.pics, ...pics]
+							if (typeof asyncStatus !== 'undefined') {
+								if (asyncStatus && !this.isMore) this.isMore = true
 							}
+						} else {
+							this.pics = [...pics]
 						}
+						this.loadingText = '加载更多'
+					} else {
+						this.loadingText = '加载完毕'
 					}
 				}
 			}
 		},
-		//点击某个分类
+		// 点击某个分类
 		selectKey(key) {
-			this.keyName = key == this.keyName ? null : key;
+			this.keyName = key === this.keyName ? null : key
 			if (this.orderObject.isopen) {
-				this.$set(this.orderObject, "isopen", false);
+				this.$set(this.orderObject, 'isopen', false)
 			}
 		},
 		// 选择某一项
 		selectOne(key, value) {
-			let select = {
-				space: this.$route.params.space, //空间
-				style: this.$route.params.style, //风格
-				part: this.$route.params.part, //硬装
-				soft: this.$route.params.soft //软装
-			};
-			if (select[key] !== value) {
-				select[key] = value;
-				this.selectArr = select;
-				this.$set(this.params, key, value);
-				this.handlePath();
-				this.getTages();
-				this.page = 1;
-				this.getList();
+			const select = {
+				space: this.$route.params.space, // 空间
+				style: this.$route.params.style, // 风格
+				part: this.$route.params.part, // 硬装
+				soft: this.$route.params.soft // 软装
 			}
-			this.keyName = null;
+			if (select[key] !== value) {
+				select[key] = value
+				this.selectArr = select
+				this.$set(this.params, key, value)
+				this.handlePath()
+				this.getTages()
+				this.getList({ page: 1 })
+			}
+			this.keyName = null
 		},
 		// 取消选中
 		cancelArr(key) {
-			this.$delete(this.selectArr, key);
-			this.$set(this.params, key, "0");
-			this.handlePath();
-			this.getTages();
-			this.page = 1;
-			this.getList();
+			this.$delete(this.selectArr, key)
+			this.$set(this.params, key, '0')
+			this.handlePath()
+			this.getTages()
+			this.getList({ page: 1 })
 		},
 		// 有购物单单选框改变
 		handleCheck(e) {
-			const value = e.target.checked;
-			const name = e.target.name;
-			this.$set(this.params, name, Number(value));
-			this.handlePath();
-			this.page = 1;
-			this.getTages();
-			this.getList();
+			const value = e.target.checked
+			const name = e.target.name
+			this.$set(this.params, name, Number(value))
+			this.handlePath()
+			this.getTages()
+			this.getList({ page: 1 })
 		},
 		// 排序选择
 		orderSelect(key, value) {
 			if (this.orderObject[key] !== value) {
-				this.$set(this.orderObject, key, value);
-				this.$set(this.params, key, value);
-				this.handlePath();
-				this.getTages();
-				this.page = 1;
-				this.getList();
+				this.$set(this.orderObject, key, value)
+				this.$set(this.params, key, value)
+				this.handlePath()
+				this.getTages()
+				this.getList({ page: 1 })
 			}
-			this.$set(this.orderObject, "isopen", false);
+			this.$set(this.orderObject, 'isopen', false)
 		},
 		// 处理跳转路径
 		handlePath() {
-			let path = "/pic/list";
-			Object.keys(this.params).forEach(item => {
-				path += "/" + this.params[item];
-			});
-			this.$router.replace({
+			let path = '/pic/list'
+			console.log(this.params)
+			Object.keys(this.params).forEach((item) => {
+				path += '/' + this.params[item]
+			})
+			this.$router.push({
 				path: path
-			});
-		},
-		getColor: randomColor
+			})
+		}
 	},
 	filters: {
 		handleText(value) {
-			let text = "";
+			let text = ''
 			if (value) {
-				text = value.substring(0, 20) + "...";
+				text = value.substring(0, 20) + '...'
 			}
-			return text;
+			return text
 		}
 	},
 	mounted() {
-		this.getTages();
-		this.getList();
+		this.getTages()
+		this.getList()
 	}
-};
+}
 </script>
 
 <style lang="less" scoped>
 #picList {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
 	.choice {
 		margin-bottom: 6.25px;
 		position: relative;
@@ -546,13 +613,29 @@ export default {
 			padding: 0 4.167px 4.167px 4.167px;
 			width: 50%;
 			.scenes-item {
-				img {
+				position: relative;
+				display: block;
+				.scenes-pic {
 					border-top-left-radius: 4.16672px;
 					border-top-right-radius: 4.16672px;
 					border-bottom-right-radius: 0;
 					border-bottom-left-radius: 0;
 					overflow: hidden;
+					background-color:#f2f2f2;
+					.fa-tag {
+						position: absolute;
+						color: #fff;
+						z-index: 1;
+						top: 5.208px;
+						right: 5.208px;
+						font-size: 14px;
+						transform: rotate(90deg);
+						padding: 3.042px 4.167px;
+						background-color: rgba(51, 51, 51, 0.6);
+						border-radius: 3.12504px;
+					}
 				}
+
 				.scenes-bottom {
 					.scenes-title {
 						padding: 10.417px 8.333px 4.167px;

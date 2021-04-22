@@ -34,12 +34,12 @@
 }
 
 [lazy="loaded"] {
-  opacity: 1 !important;
+  filter: blur(0px) !important;
 }
 
 .lazy {
-  opacity: 0;
-  transition: opacity .3s ease;
+  filter: blur(4px);
+  transition: filter 0.3s ease-in;
 }
 
 .loading-parent--relative {
@@ -53,14 +53,13 @@
 .clearfix {
   display: block;
   zoom: 1;
-
   &:after {
-    content: '\0020';
+    content: " ";
     display: block;
-    font-size: 0;
-    height: 0;
     clear: both;
-    visibility: hidden;
+    height: 0;
+    font-size: 0;
+    overflow: hidden;
   }
 }
 
@@ -103,7 +102,7 @@
     bottom: -1px;
     transform: scale(1) translate(0);
     border-bottom: 1px solid #ccc;
-    z-index: 1
+    z-index: 1;
   }
 }
 
@@ -119,9 +118,9 @@
       height: 0;
       left: 0;
       bottom: -1px;
-      transform: scale(.5) translate(-50%, -50%);
+      transform: scale(0.5) translate(-50%, -50%);
       border-bottom: 1px solid #ccc;
-      z-index: 1
+      z-index: 1;
     }
   }
 }
@@ -138,9 +137,9 @@
       height: 0;
       left: 0;
       bottom: -1px;
-      transform: scale(.33333) translate(-100%, -100%);
+      transform: scale(0.33333) translate(-100%, -100%);
       border-bottom: 1px solid #ccc;
-      z-index: 1
+      z-index: 1;
     }
   }
 }
@@ -172,7 +171,7 @@
       height: 0;
       left: 0;
       top: -1px;
-      transform: scale(.5) translate(-50%, -50%);
+      transform: scale(0.5) translate(-50%, -50%);
       border-top: 1px solid #ccc;
       z-index: 1;
     }
@@ -189,7 +188,7 @@
       height: 0;
       left: 0;
       top: -1px;
-      transform: scale(.333) translate(-100%, -100%);
+      transform: scale(0.333) translate(-100%, -100%);
       border-top: 1px solid #ccc;
       z-index: 1;
     }
@@ -223,7 +222,7 @@
       height: 0;
       left: 0;
       bottom: -1px;
-      transform: scale(.5) translate(-50%, -50%);
+      transform: scale(0.5) translate(-50%, -50%);
       border-bottom: 1px solid #ccc;
       z-index: 1;
     }
@@ -258,7 +257,7 @@
       height: 200%;
       top: 0;
       left: 0;
-      transform: scale(.5) translate(-50%, -50%);
+      transform: scale(0.5) translate(-50%, -50%);
       border: 1px solid #ccc;
       border-radius: 10.4167px;
       z-index: 1;
@@ -266,10 +265,8 @@
   }
 }
 
-
-
 .borderBottom1 {
-  position: relative
+  position: relative;
 }
 
 .borderBottom1:before {
@@ -282,10 +279,10 @@
   bottom: -1px;
   transform: scale(1) translate(0);
   border-bottom: 1px solid #ddd;
-  z-index: 1
+  z-index: 1;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:2) {
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
   .borderBottom1:before {
     position: absolute;
     box-sizing: border-box;
@@ -294,13 +291,13 @@
     height: 0;
     left: 0;
     bottom: -1px;
-    transform: scale(.5) translate(-50%, -50%);
+    transform: scale(0.5) translate(-50%, -50%);
     border-bottom: 1px solid #ddd;
-    z-index: 1
+    z-index: 1;
   }
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:3) {
+@media screen and (-webkit-min-device-pixel-ratio: 3) {
   .borderBottom1:before {
     position: absolute;
     box-sizing: border-box;
@@ -309,12 +306,11 @@
     height: 0;
     left: 0;
     bottom: -1px;
-    transform: scale(.33333) translate(-100%, -100%);
+    transform: scale(0.33333) translate(-100%, -100%);
     border-bottom: 1px solid #ddd;
     z-index: 1;
   }
 }
-
 
 .fourColor3 {
   position: relative;
@@ -340,7 +336,7 @@
   z-index: 1;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:2) {
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
   .fourColor3 {
     &.hover {
       &:before {
@@ -357,15 +353,14 @@
     height: 200%;
     top: 0;
     left: 0;
-    transform: scale(.5) translate(-50%, -50%);
+    transform: scale(0.5) translate(-50%, -50%);
     border: 1px solid #888;
     border-radius: 8.33332px;
     z-index: 1;
-
   }
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:3) {
+@media screen and (-webkit-min-device-pixel-ratio: 3) {
   .fourColor3 {
     &.hover {
       &:before {
@@ -382,9 +377,9 @@
     height: 300%;
     top: 0;
     left: 0;
-    transform: scale(.33333) translate(-100%, -100%);
+    transform: scale(0.33333) translate(-100%, -100%);
     border: 1px solid #888;
     border-radius: 8.33332px;
-    z-index: 1
+    z-index: 1;
   }
 }

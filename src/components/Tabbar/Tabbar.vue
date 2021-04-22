@@ -16,43 +16,40 @@
 
 <script>
 export default {
-  data() {
-    return {
-      tabData: [
-        {
-          path: ["/","/Index"],
-          name: "我是导航1",
-          icon: "../../../static/image/home.svg"
-        },
-        {
-          path: ["/Home2"],
-          name: "我是导航2",
-          icon: "../../../static/image/home.svg"
-        },
-        {
-          path: ["/Home3"],
-          name: "我是导航3",
-          icon: "../../../static/image/home.svg"
-        },
-        {
-          path: ["/Home4"],
-          name: "我是导航4",
-          icon: "../../../static/image/home.svg"
-        }
-      ],
-    };
-  },
-  methods: {
-    changeOne(index) {
-      if (!this.tabData[index].path.includes(this.$route.path)) {
-        this.$router.replace({ path: this.tabData[index].path[0] });
-      }
-    },
-  },
-    mounted() {
-    console.log(this.$route);
-  }
-};
+	data() {
+		return {
+			tabData: [
+				{
+					path: ['/', '/Index'],
+					name: '我是导航1',
+					icon: '../../../static/image/home.svg'
+				},
+				{
+					path: ['/Home2'],
+					name: '我是导航2',
+					icon: '../../../static/image/home.svg'
+				},
+				{
+					path: ['/Home3'],
+					name: '我是导航3',
+					icon: '../../../static/image/home.svg'
+				},
+				{
+					path: ['/Home4'],
+					name: '我是导航4',
+					icon: '../../../static/image/home.svg'
+				}
+			]
+		}
+	},
+	methods: {
+		changeOne(index) {
+			if (!this.tabData[index].path.includes(this.$route.path)) {
+				this.$router.replace({ path: this.tabData[index].path[0] })
+			}
+		}
+	}
+}
 </script>
 
 <style lang="less" scoped>

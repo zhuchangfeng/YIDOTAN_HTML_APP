@@ -1,26 +1,25 @@
 <template>
 	<div class="zc borderBottom">
-		<div class="zc-type type-1">{{mtests.tag}}</div>
-		<div class="zc-image">
+		<div class="zc__type type-1">{{mtests.tag}}</div>
+		<div class="zc__image">
 			<img v-lazy="mtests.image" alt class="lazy" />
 		</div>
-		<div class="zc-bottom">
-			<div class="zc-title">{{mtests.title}}</div>
-			<div class="zc-group">
-				<div class="zc-col">
+		<div class="zc__bottom">
+			<div class="zc__bottom--title">{{mtests.title}}</div>
+			<div class="zc__bottom--group">
+				<div class="col">
 					名额：
 					<span>{{mtests.amounts}}</span>
 				</div>
-				<div class="zc-col">
+				<div class="col">
 					免单价格：
 					<span>{{mtests.price}}元</span>
 				</div>
-				<div class="zc-col">
+				<div class="col">
 					状态：
-					<span v-if="mtests.status=='4'">进行中</span>
-					<span v-else-if="mtests.status=='0'" class="zc-over">已结束</span>
+					<span :class="mtests.option.class">{{mtests.option.text}}</span>
 				</div>
-				<div class="zc-col">
+				<div class="col">
 					已申请：
 					<span>{{mtests.applicant_num}}人</span>
 				</div>
@@ -35,8 +34,51 @@ export default {
 		mtests: {
 			type: Object
 		}
+	},
+	watch: {
+		mtests: {
+			handler: function(val) {
+				if (Object.prototype.hasOwnProperty.call(val, 'status')) {
+					const { status } = val
+					switch (status) {
+						case 0:
+							val.option = {
+								class: 'ready',
+								text: '即将开始'
+							}
+							break
+						case 1:
+							val.option = {
+								class: 'ing',
+								text: '已结束'
+							}
+							break
+						case 2:
+							val.option = {
+								class: 'over',
+								text: '即将开始'
+							}
+							break
+						case 4:
+							val.option = {
+								class: 'over',
+								text: '体验中'
+							}
+							break
+						default:
+							val.option = {
+								class: 'over',
+								text: '未知'
+							}
+							break
+					}
+				}
+			},
+			immediate: true, // 是否初始化执行
+			deep: true// 对象内部的属性监听，也叫深度监听
+		}
 	}
-};
+}
 </script>
 
 <style lang="less" scoped>
@@ -45,7 +87,7 @@ export default {
 	position: relative;
 	background-color: #f2f2f2;
 	font-size: 12px;
-	.zc-type {
+	&__type {
 		position: absolute;
 		left: 15.625px;
 		top: 15.625px;
@@ -61,7 +103,7 @@ export default {
 			background-color: #f8b434;
 		}
 	}
-	.zc-image {
+	&__image {
 		padding-bottom: 56.26%;
 		width: 100%;
 		overflow: hidden;
@@ -72,21 +114,22 @@ export default {
 			position: absolute;
 			top: 0;
 			left: 0;
+			object-fit: cover;
 		}
 	}
-	.zc-bottom {
+	&__bottom {
 		padding: 9.375px 15.625px 10.417px 15.625px;
 		background-color: #fff;
-		.zc-title {
+		&--title {
 			line-height: 20.8334px;
 			font-size: 15.625px;
 			margin-bottom: 5.20828px;
 		}
-		.zc-group {
+		&--group {
 			display: flex;
 			align-items: center;
 			flex-wrap: wrap;
-			.zc-col {
+			.col {
 				flex-basis: 50%;
 				margin-top: 4.167px;
 				font-size: 13px;
@@ -94,8 +137,14 @@ export default {
 				letter-spacing: normal;
 				span {
 					color: #333;
-					&.zc-over {
+					&.over {
 						color: #dadbde;
+					}
+					&.ing {
+						color: #f25f43;
+					}
+					&.ready{
+						color: #f8b434;
 					}
 				}
 			}

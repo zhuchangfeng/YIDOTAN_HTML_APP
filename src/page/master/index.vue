@@ -1,5 +1,5 @@
 <template>
-	<div id="master">
+	<div id="master" ref="master">
 		<div class="master-title" v-if="$route.meta.masterTop">
 			<div class="master-logo">
 				<img v-lazy="'https://h5.yidoutang.com/v4/public/logo/logo-56.png'" class="lazy" alt />
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style lang="less" scoped>

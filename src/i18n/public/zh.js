@@ -1,5 +1,5 @@
-import demo from '../zh/demo';
+import demo from '../zh/demo'
 const zh = {
-    ...demo
+	...demo
 }
 export default zh

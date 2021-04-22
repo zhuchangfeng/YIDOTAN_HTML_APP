@@ -17,17 +17,17 @@ export default {
 		return {
 			fullscreen: true,
 			visible: true,
-			//Loading 的自定义类名
-			customClass: "",
+			// Loading 的自定义类名
+			customClass: '',
 			// 背景颜色
 			background: null
-		};
+		}
 	},
 	methods: {
 		handleAfterLeave() {
 		}
 	}
-};
+}
 </script>
 
 <style lang="less" scoped>

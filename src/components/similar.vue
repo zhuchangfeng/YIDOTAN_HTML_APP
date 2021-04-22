@@ -1,23 +1,23 @@
 <template>
 	<div class="similar">
-		<h2>{{articles.subject}}</h2>
-		<div class="similar-bd">
-			<div class="bd-img">
-				<img alt="描述图片" class="lazy" v-lazy="articles.feature" />
+		<h2>{{articles.title||articles.subject}}</h2>
+		<div class="similar__bd">
+			<div class="similar__bd--img">
+				<img alt="描述图片" class="lazy" v-lazy="articles.image||articles.feature" />
 			</div>
 			<p>{{articles.summary|handleText}}</p>
 		</div>
-		<div class="similar-ft">
-			<div class="ft-avatar">
+		<div class="similar__ft">
+			<div class="similar__ft--avatar">
 				<div class="avatar-img">
 					<img alt="用户头像" class="lazy" v-lazy="articles.user_pic" />
 				</div>
-				<div class="avatar-name">{{articles.author}}</div>
+				<div class="avatar-name">{{articles.author||articles.user_name}}</div>
 			</div>
-			<div class="ft-data">
+			<div class="similar__ft--data">
 				<div class="data-item">
 					<i class="fa fa-eye" aria-hidden="true"></i>
-					<span>{{articles.views}}</span>
+					<span>{{articles.views||articles.click_num}}</span>
 				</div>
 				<div class="data-item" v-if="articles.sharings">
 					<i class="fa fa-tag" aria-hidden="true"></i>
@@ -37,13 +37,13 @@ export default {
 		}
 	},
 	filters: {
-		//处理文字
+		// 处理文字
 		handleText(value) {
-			const text = value.substring(0, 60) + "...";
-			return text;
+			const text = value.substring(0, 60) + '...'
+			return text
 		}
 	}
-};
+}
 </script>
 
 <style lang="less" scoped>
@@ -54,12 +54,12 @@ export default {
 		padding: 11.458px 0;
 		color: #212121;
 	}
-	.similar-bd {
+	&__bd {
 		display: flex;
 		align-content: center;
 		color: #777;
 		height: 75.516px;
-		.bd-img {
+		&--img {
 			height: 100%;
 			flex-basis: 114.578px;
 			background-color: #f1f1f1;
@@ -70,11 +70,11 @@ export default {
 			font-size: 12px;
 		}
 	}
-	.similar-ft {
+	&__ft {
 		padding: 10.4167px 0 13.0208px 0;
 		display: flex;
 		justify-content: space-between;
-		.ft-avatar {
+		&--avatar {
 			font-size: 12px;
 			display: flex;
 			align-items: center;
@@ -91,16 +91,13 @@ export default {
 				color: #666;
 			}
 		}
-		.ft-data {
+		&--data {
 			display: flex;
 			align-items: center;
 			font-size: 12px;
 			color: #cbcbcb;
 			.data-item {
 				margin-left: 5.208px;
-				i {
-					font-size: 12.5px;
-				}
 			}
 		}
 	}

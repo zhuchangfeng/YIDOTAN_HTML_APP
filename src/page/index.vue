@@ -1,210 +1,304 @@
 <template>
-	<div id="index" v-loading.body="isLoading">
-		<div class="index-title">
-			<div class="index-logo">
-				<img v-lazy="'https://h5.yidoutang.com/v4/public/logo/logo-56.png'" class="lazy" alt />
+	<div id="index" v-loading.body="isLoading" ref="index">
+		<div class="index__title">
+			<div class="index__title--logo">
+				<img
+					v-lazy="'https://h5.yidoutang.com/v4/public/logo/logo-56.png'"
+					class="lazy"
+					alt
+				/>
 			</div>
-			<div class="index-words">
+			<div class="index__title--words">
 				<p>一兜糖家居APP</p>
 				<p>装修家居生活社区</p>
 			</div>
-			<div class="index-download">
-				<a href="https://a.app.qq.com/o/simple.jsp?pkgname=com.yidoutang.app">下载</a>
+			<div class="index__title--download">
+				<a
+href="https://a.app.qq.com/o/simple.jsp?pkgname=com.yidoutang.app"
+					>下载</a
+				>
 			</div>
 		</div>
 
-		<div class="index-banner borderBottom">
+		<div class="index__banner borderBottom">
 			<router-link
 				:to="item.link"
-				v-for="(item,index) in bannerData"
+				v-for="(item, index) in bannerData"
 				:key="index"
 				:data-type="item.type"
 			>
-				<div class="banner-item">
+				<div class="index__banner--item">
 					<div class="item-img">
 						<img :alt="item.title" v-lazy="item.icon" />
 					</div>
-					<p>{{item.title}}</p>
+					<p>{{ item.title }}</p>
 				</div>
 			</router-link>
 		</div>
 
-		<div class="index-col borderBottom">
-			<div class="col-title">
-				<div class="col-bl"></div>今日屋主
+		<div class="index__col borderBottom">
+			<div class="index__col--title">
+				<div class="col-bl"></div>
+				今日屋主
 			</div>
-			<div class="col-star">
-				<img v-lazy="master[0]&&master[0].pic" alt class="lazy" />
+			<div class="index__col--star">
+				<img v-lazy="master.pic" alt class="lazy" />
 				<div class="col-avatar">
-					<img v-lazy="master[0]&&master[0].user_pic" alt class="avatar-img lazy" />
-					<img
-						v-lazy="'https://h5.yidoutang.com/v4/public/identity_3.png'"
-						alt
-						class="avatar-identity lazy"
-					/>
+					<router-link :to="'/user/' + master.user_id">
+						<img v-lazy="master.user_pic" alt class="avatar-img lazy" />
+						<img
+							v-lazy="'https://h5.yidoutang.com/v4/public/identity_3.png'"
+							alt
+							class="avatar-identity lazy"
+						/>
+					</router-link>
 				</div>
 				<div class="col-info">
-					<div class="info-title">{{master[0]&&master[0].title}}</div>
-					<div class="info-name">{{master[0]&&master[0].user_name}}</div>
+					<div class="info-title">{{ master.title }}</div>
+					<div class="info-name">{{ master.user_name }}</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="index-col borderBottom pb0" ref="recommend">
-			<div class="col-title">
-				<div class="col-bl"></div>编辑精选
+		<div class="index__col borderBottom pb0" ref="recommend">
+			<div class="index__col--title">
+				<div class="col-bl"></div>
+				编辑精选
 			</div>
-			<essay v-for="(item,index) in recommend" :key="index" :value="item" @handGain="handClick"></essay>
+			<essay
+				v-for="(item, index) in recommend"
+				:key="index"
+				:value="item"
+				@handGain="handClick"
+			></essay>
 		</div>
-
-		<div class="index-more" @click="scrollTo();getHome();">{{loadingText}}</div>
-		<div class="index-open">App 内打开</div>
+		<div class="index__more" @click="getHome()">
+			{{ loadingText }}
+		</div>
+		<div class="index__open">App 内打开</div>
 	</div>
 </template>
 
 <script>
-import essay from "@/components/essay.vue";
-import { getInfo } from "../api/api";
+import essay from '@/components/essay.vue'
+import { getInfo } from '../api/api'
 export default {
 	data() {
 		return {
 			bannerData: [],
 			recommend: [],
-			master: [],
+			master: {},
 			isLoading: true,
-			loadingText: "",
+			loadingText: '',
 			page: 1
-		};
+		}
 	},
 	components: {
 		essay
 	},
 	methods: {
 		checkType() {
-			const that = this;
-			let arr = that.bannerData.reduce((item, index) => {
-				const { title } = index;
+			const self = this
+			const arr = self.bannerData.reduce((item, index) => {
+				const { title } = index
 				switch (title) {
-					case "全屋记":
-						index.link = "/";
-						break;
-					case "文章攻略":
-						index.link = "/";
-						break;
-					case "新手指南":
-						const { data } = index;
-						index.link = "/master/" + data;
-						break;
-					case "众测":
-						index.link = "/zhongce/list";
-						break;
+					case '全屋记':
+						index.link = '/case/list/0/0/0/0/0/0'
+						break
+					case '文章攻略':
+						index.link = '/master/decorate/91,92'
+						break
+					case '新手指南': {
+						const { data } = index
+						index.link = '/master/' + data
+						break
+					}
+					case '众测':
+						index.link = '/zhongce/list'
+						break
 					default:
-						index.link = "/";
-						break;
+						index.link = '/'
+						break
 				}
-				if (index.type != "0") {
-					if (that._.findIndex(item, o => o.type == index.type) == -1) {
-						item.push(index);
+				if (index.type !== '0') {
+					if (self._.findIndex(item, (o) => o.type === index.type) === -1) {
+						item.push(index)
 					} else {
-						item[that._.findIndex(item, o => o.type == index.type)] = index;
+						item[self._.findIndex(item, (o) => o.type === index.type)] = index
 					}
 				}
-				return item;
-			}, []);
-			that.bannerData = arr;
+				return item
+			}, [])
+			self.bannerData = arr
 		},
 		getHome() {
-			this.loadingText = "加载中...";
+			this.loadingText = '加载中...'
 			getInfo({
 				params: {
 					page: this.page
 				}
-			}).then(r => {
-				const { data } = r;
-				if (this.isLoading) {
-					this.isLoading = false;
+			}).then((r) => {
+				const res = r?.data
+				let scrollTop = 0
+				if (document.documentElement && document.documentElement.scrollTop) {
+					scrollTop = document.documentElement.scrollTop
+				} else if (document.body) {
+					scrollTop = document.body.scrollTop
 				}
-				this.loadingText = "加载更多";
-				if (data.success_code == 200) {
-					var array = ["recommend", "master"];
-					for (const iterator of array) {
-						if (!this._isEmpty(data.data[iterator])) {
+				if (this.isLoading) {
+					this.isLoading = false
+				}
+				this.loadingText = '加载更多'
+				if (res?.success_code === 200) {
+					const array = ['recommend']
+					const data = res?.data
+					const master = data?.master
+					for (const key of array) {
+						if (!this._isEmpty(data?.[key])) {
 							if (this.page > 1) {
-								this.recommend = [...this.recommend, ...data.data["recommend"]];
-							} else if (this.page == 1) {
-								this[iterator] = data.data[iterator];
+								this.recommend = [...this.recommend, ...data['recommend']]
+								this.$nextTick(() => {
+									if (scrollTop) {
+										window.scroll(0, scrollTop)
+									}
+								})
+							} else if (this.page === 1) {
+								this[key] = data[key]
 							}
 						}
 					}
-					if (this.page == 1) {
-						this.bannerData = data.data.nav;
+					if (this.page === 1) {
+						this.bannerData = data?.nav
 						if (!this._isEmpty(this.bannerData)) {
-							this.checkType();
+							this.checkType()
 						}
 					}
-					this.page = this.page + 1;
+					if (this._getType(master) === 'array') {
+						if (master.length > 0) {
+							this.master = master[0]
+						}
+					}
+					this.page = this.page + 1
 				}
-			});
-		},
-		scrollTo() {
-			this.$nextTick(() => {
-				if (this.$refs.hasOwnProperty("recommend")) {
-					const { bottom } = this.$refs.recommend.getBoundingClientRect();
-					document.getElementById("app").scrollTop = bottom;
-				}
-			});
+			})
 		},
 		handClick(obj) {
-			if (this._getType(obj) == "object") {
-				if (obj.hasOwnProperty("id")) {
-					if (!this._isEmpty(obj.id)) {
-						switch (obj.subtype) {
-							case "8":
-								this.$router.push({
-									path: "/new/" + obj.id
-								});
-								break;
-							case "0":
-								this.$router.push({
-									path: "/master/" + obj.id
-								});
-								break;
-							default:
-								break;
-						}
-					}
+			if (!this._isEmpty(obj?.id)) {
+				switch (obj.subtype) {
+					case '8':
+						this.$router.push({
+							path: '/new/' + obj.id
+						})
+						break
+					case '0':
+						this.$router.push({
+							path: '/master/' + obj.id
+						})
+						break
+					default:
+						break
 				}
 			}
 		}
 	},
 	created() {
-		this.getHome();
+		this.getHome()
+		// Hi I am Tony
+		// 等待了5秒...
+		// I am eating lunch
+		// I am eating dinner
+		// 等待了10秒...
+		// I am eating junk food
+		class LazyManClass {
+			constructor(name) {
+				this.task = []
+				this.name = name
+				console.log(`Hi I am ${this.name}`)
+				setTimeout(() => {
+					this.next()
+				}, 0)
+			}
+			eat(val) {
+				var self = this
+				this.task.push(() => {
+					console.log(` I am eating${val}`)
+					self.next()
+				})
+				return this
+			}
+			sleepFirst(time) {
+				var self = this
+				this.task.unshift(() => {
+					setTimeout(() => {
+						console.log(`等待了${time}秒...`)
+						self.next()
+					}, time * 1000)
+				})
+				return this
+			}
+			sleep(time) {
+				var self = this
+				this.task.push(() => {
+					setTimeout(() => {
+						console.log(`等待了${time}秒...`)
+						self.next()
+					}, time * 1000)
+				})
+				return this
+			}
+			next() {
+				var fn = this.task.shift()
+				typeof fn === 'function' && fn()
+			}
+		}
+		new LazyManClass('Felix')
+			.eat('lunch')
+			.eat('dinner')
+			.sleepFirst(5)
+			.sleep(10)
+			.eat('junk food')
 	}
-};
+}
+function SuperType() {
+	this.property = true
+}
+SuperType.prototype.getSuperValue = function() {
+	return this.property
+}
+function SubType() {
+	this.subproperty = false
+}
+SubType.prototype = new SuperType()
+console.log(SubType.prototype)
+SubType.prototype.getSubType = function() {
+	return this.subproperty
+}
 </script>
 
 <style lang="less" scoped>
 @import url("../style/fuction.less");
 #index {
+	width: 100%;
 	height: 100%;
-	.index-title {
+	overflow: auto;
+	.index__title {
 		position: relative;
 		z-index: 1;
-		height: 52.08px;
+		height: 75px;
 		width: 100%;
 		background-color: hsla(0, 0%, 100%, 0.96);
 		padding: 0 14.5833px;
 		display: flex;
 		align-items: center;
 		box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-		.index-logo {
+		&--logo {
 			width: 37.48px;
 			height: 37.48px;
 			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 			border-radius: 10.42px;
 			padding: 5.2px;
 		}
-		.index-words {
+		&--words {
 			margin-left: 14.5833px;
 			p:first-child {
 				font-size: 15.625px;
@@ -217,7 +311,7 @@ export default {
 				margin-top: 3.13px;
 			}
 		}
-		.index-download {
+		&--download {
 			flex: 1;
 			display: flex;
 			justify-content: flex-end;
@@ -232,7 +326,7 @@ export default {
 			}
 		}
 	}
-	.index-banner {
+	.index__banner {
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
@@ -245,24 +339,24 @@ export default {
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
-			.banner-item {
-				.item-img {
-					width: 28.125px;
-					height: 28.125px;
-					margin: 0 auto 7.5px auto;
-				}
-				p {
-					font-size: 12px;
-					color: #666;
-				}
+		}
+		&--item {
+			.item-img {
+				width: 28.125px;
+				height: 28.125px;
+				margin: 0 auto 7.5px auto;
+			}
+			p {
+				font-size: 12px;
+				color: #666;
 			}
 		}
 	}
-	.index-col {
+	.index__col {
 		background-color: #fff;
 		margin-bottom: 10.4px;
 		padding-bottom: 15.6px;
-		.col-title {
+		&--title {
 			padding: 12.5px 23.96px;
 			font-size: 13px;
 			position: relative;
@@ -276,7 +370,7 @@ export default {
 				background-color: #ffda46;
 			}
 		}
-		.col-star {
+		&--star {
 			height: 104.156px;
 			margin: 0 10.4167px;
 			position: relative;
@@ -292,7 +386,6 @@ export default {
 			}
 			.col-avatar {
 				position: absolute;
-				top: 0;
 				z-index: 1;
 				left: 23.4375px;
 				top: 26.0416px;
@@ -307,9 +400,10 @@ export default {
 				.avatar-identity {
 					width: 15.6094px;
 					height: 15.6094px;
-					margin-left: -22px;
-					margin-bottom: -2px;
 					display: inline-block;
+					position: absolute;
+					bottom: 0;
+					left: 35px;
 				}
 			}
 			.col-info {
@@ -332,7 +426,7 @@ export default {
 			}
 		}
 	}
-	.index-open {
+	.index__open {
 		border-radius: 26.0416px;
 		width: 110.14px;
 		line-height: 38.81px;
@@ -347,7 +441,7 @@ export default {
 		color: #fff;
 		z-index: 1;
 	}
-	.index-more {
+	.index__more {
 		margin: 9.375px;
 		height: 41.65px;
 		line-height: 41.65px;

@@ -1,9 +1,8 @@
-//see:https://github.com/ElemeFE/element/blob/6ec5f8e900ff698cf30e9479d692784af836a108/src/utils/util.js
-import Vue from 'vue';
-const isServer = Vue.prototype.$isServer;
-const version = "0.1";
-const hasOwnProperty = Object.prototype.hasOwnProperty;
-const typer = Object.prototype.toString;
+// see:https://github.com/ElemeFE/element/blob/6ec5f8e900ff698cf30e9479d692784af836a108/src/utils/util.js
+import Vue from 'vue'
+const isServer = Vue.prototype.$isServer
+const hasOwnProperty = Object.prototype.hasOwnProperty
+const typer = Object.prototype.toString
 /**
  * @param {value} 待检查的值
  * @description
@@ -11,14 +10,14 @@ const typer = Object.prototype.toString;
  * @export
  */
 export function getType(value) {
-    var typeStr = typer.call(value);
-    typeStr = typeStr.replace(/.*\s(\w+)\]/g, '$1');
-    return typeStr.toLowerCase();
+	var typeStr = typer.call(value)
+	typeStr = typeStr.replace(/.*\s(\w+)\]/g, '$1')
+	return typeStr.toLowerCase()
 }
 
 export function hasOwn(obj, key) {
-    return hasOwnProperty.call(obj, key);
-};
+	return hasOwnProperty.call(obj, key)
+}
 /**
  * @param {to}目标对象
  * @param {_from}传入对象
@@ -27,20 +26,19 @@ export function hasOwn(obj, key) {
  * @export
  */
 export function extend(to, _from) {
-    const isObj = getType(to) == "object" ? getType(_from) == "object" ? true : false : false;
-    if (isObj) {
-        for (let key in _from) {
-            if (hasOwn(_from, key)) {
-                const element = _from[key];
-                to[key] = element;
-            }
-            return to;
-        }
-    } else {
-        if (to) return to;
-        if (_from) return _from;
-    }
-
+	const isObj = getType(to) === 'object' ? getType(_from) === 'object' : false
+	if (isObj) {
+		for (const key in _from) {
+			if (hasOwn(_from, key)) {
+				const element = _from[key]
+				to[key] = element
+			}
+			return to
+		}
+	} else {
+		if (to) return to
+		if (_from) return _from
+	}
 }
 /**
  * @param {arr}目标对象
@@ -49,20 +47,20 @@ export function extend(to, _from) {
  * @export
  */
 export function toObject(arr) {
-    if (getType(arr) == "object") {
-        return arr
-    } else {
-        var res = {};
-        for (let i = 0; i < arr.length; i++) {
-            const element = arr[i];
-            if (element) {
-                extend(res, {
-                    [i]: element
-                })
-            }
-        }
-        return res
-    }
+	if (getType(arr) === 'object') {
+		return arr
+	} else {
+		var res = {}
+		for (let i = 0; i < arr.length; i++) {
+			const element = arr[i]
+			if (element) {
+				extend(res, {
+					[i]: element
+				})
+			}
+		}
+		return res
+	}
 }
 
 /**
@@ -71,8 +69,8 @@ export function toObject(arr) {
  * @export
  */
 export const generateId = function() {
-    return Math.floor(Math.random() * 10000);
-};
+	return Math.floor(Math.random() * 10000)
+}
 
 /**
  * @description
@@ -80,30 +78,30 @@ export const generateId = function() {
  *  @param {value}传入的值
  * @export
  */
-export const escapeRegexpString = (value = '') => String(value).replace(/[|\\{}()[\]^$+*?.]/g, '\\$&');
+export const escapeRegexpString = (value = '') => String(value).replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
 /**
  * @description
  * 是否IE浏览器
  * @export
  */
 export const isIE = function() {
-    return !isServer && !isNaN(Number(document.documentMode));
-};
+	return !isServer && !isNaN(Number(document.documentMode))
+}
 /**
  * @description
  * 是否Edge浏览器
  * @export
  */
 export const isEdge = function() {
-    return !isServer && navigator.userAgent.indexOf('Edge') > -1;
-};
+	return !isServer && navigator.userAgent.indexOf('Edge') > -1
+}
 /**
  * 是否Firefox浏览器
  * @export
  */
 export const isFirefox = function() {
-    return !isServer && !!window.navigator.userAgent.match(/firefox/i);
-};
+	return !isServer && !!window.navigator.userAgent.match(/firefox/i)
+}
 
 /**
  * @param {val} 待检查的值
@@ -112,26 +110,26 @@ export const isFirefox = function() {
  * @export
  */
 export const isEmpty = function(val) {
-    if (val == null) return true;
-    if (typeof val === 'boolean') return false;
-    if (typeof val === 'number') return !val;
-    if (val instanceof Error) return val.message === '';
-    const type = getType(val);
-    switch (type) {
-        case 'array':
-            return !val.length;
-        case 'string':
-            return !val.replace(/\s+/g, "").length;
-        case 'file':
-        case 'map':
-        case 'set':
-            {
-                return !val.size;
-            }
-        case 'object':
-            return !Object.keys(val).length;
-    }
-    return false;
+	if (val == null) return true
+	if (typeof val === 'boolean') return false
+	if (typeof val === 'number') return !val
+	if (val instanceof Error) return val.message === ''
+	const type = getType(val)
+	switch (type) {
+		case 'array':
+			return !val.length
+		case 'string':
+			return !val.replace(/\s+/g, '').length
+		case 'file':
+		case 'map':
+		case 'set':
+		{
+			return !val.size
+		}
+		case 'object':
+			return !Object.keys(val).length
+	}
+	return false
 }
 
 /**
@@ -141,11 +139,11 @@ export const isEmpty = function(val) {
  * @export
  */
 export const objToArray = function(obj) {
-    const type = getType(obj);
-    if (type == "array") {
-        return obj;
-    }
-    return isEmpty(obj) ? [] : [obj]
+	const type = getType(obj)
+	if (type === 'array') {
+		return obj
+	}
+	return isEmpty(obj) ? [] : [obj]
 }
 
 /**
@@ -155,11 +153,11 @@ export const objToArray = function(obj) {
  * @export
  */
 export const capitalize = function(str) {
-    const type = getType(str);
-    if (type == "string") {
-        return str.charAt(0).toUpperCase() + str.slice(1);;
-    }
-    return str
+	const type = getType(str)
+	if (type === 'string') {
+		return str.charAt(0).toUpperCase() + str.slice(1)
+	}
+	return str
 }
 
 /**
@@ -169,16 +167,15 @@ export const capitalize = function(str) {
  * @export
  */
 export const valueEquals = (a, b) => {
-    if (a === b) return true;
-    if (!(a instanceof Array)) return false;
-    if (!(b instanceof Array)) return false;
-    if (a.length !== b.length) return false;
-    for (let i = 0; i !== a.length; ++i) {
-        if (a[i] !== b[i]) return false;
-    }
-    return true;
-};
-
+	if (a === b) return true
+	if (!(a instanceof Array)) return false
+	if (!(b instanceof Array)) return false
+	if (a.length !== b.length) return false
+	for (let i = 0; i !== a.length; ++i) {
+		if (a[i] !== b[i]) return false
+	}
+	return true
+}
 
 /**
  * @description
@@ -191,11 +188,11 @@ export const valueEquals = (a, b) => {
  * // => true
  */
 export function isiOS(ua) {
-    /* istanbul ignore if */
-    if (!ua) {
-        ua = window.navigator.userAgent;
-    }
-    return !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+	/* istanbul ignore if */
+	if (!ua) {
+		ua = window.navigator.userAgent
+	}
+	return !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
 }
 
 /**
@@ -209,17 +206,16 @@ export function isiOS(ua) {
  * // => true
  */
 export function isAndroid(ua) {
-    /* istanbul ignore if */
-    if (!ua) {
-        ua = window.navigator.userAgent;
-    }
-    return -1 < ua.indexOf('Android') || -1 < ua.indexOf('Adr');
+	/* istanbul ignore if */
+	if (!ua) {
+		ua = window.navigator.userAgent
+	}
+	return ua.indexOf('Android') > -1 || ua.indexOf('Adr') > -1
 }
-
 
 /**
  * @description
- * 判断平台是否是微信 
+ * 判断平台是否是微信
  * @param {string} [ua=window.navigator.userAgent] ua字符串
  * @returns {boolean} 返回判断结果
  * @example
@@ -228,16 +224,16 @@ export function isAndroid(ua) {
  * // => true
  */
 export function isWechat(ua) {
-    /* istanbul ignore if */
-    if (!ua) {
-        ua = window.navigator.userAgent;
-    }
-    return /MicroMessenger/i.test(ua);
+	/* istanbul ignore if */
+	if (!ua) {
+		ua = window.navigator.userAgent
+	}
+	return /MicroMessenger/i.test(ua)
 }
 
 /**
  * @description
- * 获取URL的参数 
+ * 获取URL的参数
  * @param {string} name字符串
  * @returns {string||null} 返回判断结果
  * @export
@@ -246,16 +242,16 @@ export function isWechat(ua) {
  * // => string||null
  */
 export function parseUrl(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) {
-        return unescape(r[2])
-    }
-    return null
-};
+	var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+	var r = window.location.search.substr(1).match(reg)
+	if (r != null) {
+		return unescape(r[2])
+	}
+	return null
+}
 /**
  * @description
- * 随机颜色 
+ * 随机颜色
  * @param {number} opacity
  * @returns {string} 返回判断结果
  * @export
@@ -263,25 +259,36 @@ export function parseUrl(name) {
  * rgba(199, 223, 145, 0.3);
  */
 export function randomColor(opacity = 0.3) {
-    const r = Math.floor(Math.random() * 256);
-    const g = Math.floor(Math.random() * 256);
-    const b = Math.floor(Math.random() * 256);
-    const a = /^0\.[1-9]\d*$/.test(opacity) ? opacity : 1
-    return "rgba(" + r + ',' + g + ',' + b + ',' + opacity + ")";
-};
+	const r = Math.floor(Math.random() * 256)
+	const g = Math.floor(Math.random() * 256)
+	const b = Math.floor(Math.random() * 256)
+	const a = /^0\.[1-9]\d*$/.test(opacity) ? opacity : 1
+	return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')'
+}
 /**
- * @description
- * 获取随机数 
- * @param {number} min  {number} max
+ * @description 获取随机数
+ * @param {number} min
+ * @param{number} max
  * @returns {number} 返回判断结果
  * @export
  * @example
  *  random(2,5) ===> 5
  */
 export function random(min, max) {
-    if (max == null) {
-        max = min;
-        min = 0;
-    }
-    return min + Math.floor(Math.random() * (max - min + 1));
+	if (max == null) {
+		max = min
+		min = 0
+	}
+	return min + Math.floor(Math.random() * (max - min + 1))
 }
+/**
+ * @description 将RGB模式下的颜色转换为十六进制
+ * @param {number} r
+ * @param {number} g
+ * @param {number} b
+ * @returns {string} 返回判断结果
+ * @export
+ * @example
+ *  RGBToHex(255, 255, 255)===> ffffff
+ */
+export const RGBToHex = (r, g, b) => ((r << 16) + (g << 8) + b).toString(16).padStart(6, '0')

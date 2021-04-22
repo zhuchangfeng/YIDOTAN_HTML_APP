@@ -1,4 +1,4 @@
-import { hasOwn } from "./index.js"
+import { hasOwn } from './index.js'
 export function isVNode(node) {
-    return node != null && typeof node === 'object' && hasOwn(node, 'componentOptions')
+	return node != null && typeof node === 'object' && hasOwn(node, 'componentOptions')
 }

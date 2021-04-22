@@ -12,70 +12,70 @@ export default {
 		return {
 			visible: false,
 			closed: false,
-			message: "",
+			message: '',
 			duration: 3000,
 			timer: null,
 			onClose: null,
 			verticalOffset: 20,
-			customClass: ""
-		};
+			customClass: ''
+		}
 	},
 	computed: {
 		positionStyle() {
 			return {
 				bottom: `${this.verticalOffset}px`
-			};
+			}
 		},
 		messageText() {
-			const message = String(this.message);
-			return message;
+			const message = String(this.message)
+			return message
 		}
 	},
 	watch: {
 		closed(newVal) {
 			if (newVal) {
-				this.visible = false;
+				this.visible = false
 			}
 		}
 	},
 	methods: {
 		handleAfterLeave() {
-			this.$destroy(true);
-			this.$el.parentNode.removeChild(this.$el);
+			this.$destroy(true)
+			this.$el.parentNode.removeChild(this.$el)
 		},
 		startTimer() {
 			if (this.duration > 0) {
 				this.timer = setTimeout(() => {
 					if (!this.closed) {
-						this.close();
+						this.close()
 					}
-				}, this.duration);
+				}, this.duration)
 			}
 		},
 		close() {
-			this.closed = true;
-			this.onClose && typeof this.onClose == "function" && this.onClose(this);
+			this.closed = true
+			this.onClose && typeof this.onClose === 'function' && this.onClose(this)
 		},
 		keydown(e) {
 			if (e.keyCode === 27) {
 				// esc关闭消息
 				if (!this.closed) {
-					this.close();
+					this.close()
 				}
 			}
 		}
 	},
 	mounted() {
-		this.startTimer();
-		document.addEventListener("keydown", this.keydown);
+		this.startTimer()
+		document.addEventListener('keydown', this.keydown)
 	},
 	beforeDestroy() {
 		if (this.timer) {
-			clearTimeout(this.timer);
+			clearTimeout(this.timer)
 		}
-		document.removeEventListener("keydown", this.keydown);
+		document.removeEventListener('keydown', this.keydown)
 	}
-};
+}
 </script>
 
 <style lang="less" scoped>

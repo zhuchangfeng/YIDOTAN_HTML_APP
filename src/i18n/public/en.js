@@ -1,5 +1,5 @@
-import demo from '../en/demo';
+import demo from '../en/demo'
 const en = {
-    ...demo
+	...demo
 }
 export default en

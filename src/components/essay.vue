@@ -1,22 +1,24 @@
 <template>
 	<div class="essay borderBottom" @click="handClick">
-		<h2 class="essay-title Oline">{{value.title}}</h2>
-		<div class="essay-bd">
-			<div class="bd-img">
+		<h2 class="essay__title Oline">{{value.title}}</h2>
+		<div class="essay__bd">
+			<div class="essay__bd--img">
 				<img alt class="lazy" v-lazy="value.cover" />
 			</div>
 			<p>{{value.summary}}</p>
 		</div>
-		<div class="essay-ft">
-			<div class="ft-l">
+		<div class="essay__ft">
+			<div class="essay__ft--left">
 				<div class="avatar">
 					<div class="avatar-img">
-						<img alt class="lazy" v-lazy="value.user_pic" />
-						<img
-							v-lazy="'https://h5.yidoutang.com/v4/public/identity_3.png'"
-							alt
-							class="avatar-identity lazy"
-						/>
+						<router-link :to="'/user/'+value.authorid">
+							<img alt class="lazy" v-lazy="value.user_pic" />
+							<img
+								v-lazy="'https://h5.yidoutang.com/v4/public/identity_3.png'"
+								alt
+								class="avatar-identity lazy"
+							/>
+						</router-link>
 					</div>
 					<div class="avatar-name">{{value.author}}</div>
 					<div class="avatar-hr borderRight"></div>
@@ -32,7 +34,7 @@
           <span class="tag-name">sdsss</span>
 				</div>-->
 			</div>
-			<div class="ft-r">
+			<div class="essay__ft--right">
 				<span class="tag" :type="value.subtype" v-if="!_isEmpty(value.tagname)">{{value.tagname}}</span>
 			</div>
 		</div>
@@ -52,18 +54,18 @@ export default {
 			const obj = {
 				subtype: this.value.subtype,
 				id: this.value.id
-			};
+			}
 			if (!this._isEmpty(obj.subtype) && !this._isEmpty(obj.id)) {
-				this.$emit("handGain", obj);
+				this.$emit('handGain', obj)
 			}
 		}
 	}
-};
+}
 </script>
 
 <style lang="less" scoped>
 .essay {
-	padding: 0 12.5px 11.46px 12.5px;
+	padding:  11.46px 12.5px;
 	&.borderBottom {
 		position: relative;
 		&::after {
@@ -80,31 +82,15 @@ export default {
 			z-index: 1;
 		}
 	}
-	& .borderRight {
-		position: relative;
-		&::after {
-			display: block;
-			position: absolute;
-			box-sizing: border-box;
-			content: "";
-			width: 0;
-			height: 200%;
-			top: 0;
-			right: 0;
-			transform: scale(0.5) translate(-50%, -50%);
-			border-right: 1px solid #999;
-			z-index: 1;
-		}
-	}
-	.essay-title {
+	&__title {
 		font-size: 14px;
-		margin: 11.46px 0;
+		margin-bottom: 11.46px;
 		font-weight: 400;
 		color: #212121;
 	}
-	.essay-bd {
+	&__bd {
 		display: flex;
-		.bd-img {
+		&--img {
 			width: 114.6px;
 			height: 75.5px;
 			margin-right: 12.5px;
@@ -116,10 +102,10 @@ export default {
 			color: #777;
 		}
 	}
-	.essay-ft {
+	&__ft {
 		margin-top: 11.46px;
 		display: flex;
-		.ft-l {
+		&--left {
 			flex: 1;
 			display: flex;
 			align-items: center;
@@ -128,7 +114,7 @@ export default {
 				align-items: center;
 				height: 21.875px;
 				position: relative;
-				.avatar-img {
+				&-img {
 					width: 21.875px;
 					height: 100%;
 					border-radius: 50%;
@@ -138,43 +124,59 @@ export default {
 						vertical-align: top;
 					}
 				}
-				.avatar-identity {
+				&-identity {
 					width: 10.4063px;
 					height: 10.4063px;
 					position: absolute;
 					bottom: -4px;
 					left: 14px;
 				}
-				.avatar-name {
+				&-name {
 					font-size: 12px;
 					margin-right: 6.25px;
 					color: #666;
 				}
-				.avatar-hr {
+				&-hr {
 					width: 1px;
 					height: 64%;
+					&.borderRight {
+						position: relative;
+						&::after {
+							display: block;
+							position: absolute;
+							box-sizing: border-box;
+							content: "";
+							width: 0;
+							height: 200%;
+							top: 0;
+							right: 0;
+							transform: scale(0.5) translate(-50%, -50%);
+							border-right: 1px solid #999;
+							z-index: 1;
+						}
+					}
 				}
 			}
 			.view {
 				font-size: 12px;
 				color: gray;
-				.view-icon {
+				&-icon {
 					margin-left: 6.25px;
 				}
-				.view-num {
+				&-num {
 				}
 			}
 			.tag {
 				font-size: 12px;
 				color: gray;
-				.tag-icon {
+				&-icon {
 					margin-left: 6.25px;
 				}
-				.tag-name {
+				&-name {
 				}
 			}
 		}
-		.ft-r {
+		&--right {
 			text-align: right;
 			.tag {
 				&[type="8"] {

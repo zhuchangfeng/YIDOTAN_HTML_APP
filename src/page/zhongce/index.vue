@@ -1,23 +1,34 @@
 <template>
 	<div id="zhongce">
-		<div class="zhongce-top borderBottom clearfix" v-if="$route.meta.zhongceTop">
-			<router-link :to="{ path: '/zhongce/list' }" class="first_tab_nav">众测商品</router-link>
+		<div
+			class="zhongce-top borderBottom clearfix"
+			v-if="$route.meta.zhongceTop"
+		>
+			<router-link
+				:to="{ path: '/zhongce/list' }"
+				class="first_tab_nav"
+				>众测商品</router-link
+			>
 			<router-link :to="{ path: '/zhongce/similar' }">测评文章</router-link>
 		</div>
-		<router-view></router-view>
+
+		<router-view v-if="!$route.meta.keepAlive"></router-view>
+
+		<keep-alive>
+			<router-view v-if="$route.meta.keepAlive"></router-view>
+		</keep-alive>
 	</div>
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
-
 <style lang="less" scoped>
 #zhongce {
 	.zhongce-top {
 		width: 100%;
 		background-color: #fff;
-		margin-bottom: 9.375px;
+		// margin-bottom: 9.375px;
 		font-size: 12px;
 		font-family: PingFangSC-Light;
 		display: flex;

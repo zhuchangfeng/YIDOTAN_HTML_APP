@@ -1,6 +1,6 @@
 /**
  * @description
- * 获取 cookie 
+ * 获取 cookie
  * @export
  * @param {string} name cookie的name
  * @returns {string | null} 返回查询到的字符串，若查询不到，则返回 null
@@ -9,9 +9,9 @@
  * // => name_string
  */
 export function getCookie(name) {
-    const reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)")
-    const r = document.cookie.match(reg)
-    return r ? unescape(r[2]) : null
+	const reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)')
+	const r = document.cookie.match(reg)
+	return r ? unescape(r[2]) : null
 }
 
 /**
@@ -29,22 +29,29 @@ export function getCookie(name) {
  * Utils.setCookie('name','name_string')
  */
 
-export function setCookie(name, value, expiresDay = 0, path = '/', domain = '') {
-    let expStr = '';
-    if (expiresDay !== 0) {
-        const exp = new Date();
-        exp.setTime(exp.getTime() + expiresDay * 24 * 60 * 60 * 1000);
-        expStr = ';expires=' + exp.toUTCString();
-    }
-    let pathStr = '';
-    if (path) {
-        pathStr = ';path=' + path;
-    }
-    let domainStr = ''
-    if (domain) {
-        domainStr = '; domain=' + domain
-    }
-    document.cookie = name + '=' + encodeURIComponent(value) + pathStr + expStr + domainStr;
+export function setCookie(
+	name,
+	value,
+	expiresDay = 0,
+	path = '/',
+	domain = ''
+) {
+	let expStr = ''
+	if (expiresDay !== 0) {
+		const exp = new Date()
+		exp.setTime(exp.getTime() + expiresDay * 24 * 60 * 60 * 1000)
+		expStr = ';expires=' + exp.toUTCString()
+	}
+	let pathStr = ''
+	if (path) {
+		pathStr = ';path=' + path
+	}
+	let domainStr = ''
+	if (domain) {
+		domainStr = '; domain=' + domain
+	}
+	document.cookie =
+    name + '=' + encodeURIComponent(value) + pathStr + expStr + domainStr
 }
 
 /**
@@ -59,5 +66,5 @@ export function setCookie(name, value, expiresDay = 0, path = '/', domain = '') 
  * Utils.delCookie('name','/','')
  */
 export function delCookie(name, path = '/', domain = '') {
-    setCookie(name, '', -1, path, domain);
+	setCookie(name, '', -1, path, domain)
 }

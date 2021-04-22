@@ -1,0 +1,20 @@
+:root {
+    --origin-safe-area-inset-top: 0px;
+    --origin-safe-area-inset-bottom: 0px;
+    --safe-area-inset-top: var(--windvane-safe-area-inset-top, var(--origin-safe-area-inset-top));
+    --safe-area-inset-bottom: var(--windvane-safe-area-inset-bottom, var(--origin-safe-area-inset-bottom))
+}
+
+@supports (width:constant(safe-area-inset-top)) {
+    :root {
+        --origin-safe-area-inset-top: constant(safe-area-inset-top);
+        --origin-safe-area-inset-bottom: constant(safe-area-inset-bottom)
+    }
+}
+
+@supports (width:env(safe-area-inset-top)) {
+    :root {
+        --origin-safe-area-inset-top: env(safe-area-inset-top);
+        --origin-safe-area-inset-bottom: env(safe-area-inset-bottom)
+    }
+}

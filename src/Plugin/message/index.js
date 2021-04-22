@@ -1,2 +1,2 @@
-import Message from './src/index';
-export default Message;
+import Message from './src/index'
+export default Message
