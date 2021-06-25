@@ -21,6 +21,7 @@ Vue.use(Popup).use(Cell).use(NumberKeyboard).use(Button).use(Swipe).use(SwipeIte
 Vue.use(VRFCT)
 Vue.use(Plugin)
 Vue.use(VueLazyload, {
+<<<<<<< HEAD
 	preLoad: 1.3,
 	// error: 'dist/error.png',
 	// loading: '/static/image/loading.png',
@@ -34,6 +35,20 @@ Vue.use(VueLazyload, {
 	}
 })
 Vue.component('Profile', () => import ('./extend/profile'))
+=======
+    preLoad: 1.3,
+    // error: 'dist/error.png',
+    // loading: 'dist/loading.gif',
+    attempt: 3,
+    // listenEvents: ['scroll'], //['scroll','wheel','mousewheel','resize','animationend','transitionend','touchmove']
+    observer: true,
+    // optional
+    observerOptions: {
+        rootMargin: '0px',
+        threshold: 0.1
+    }
+});
+>>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 
 Vue.config.keyCodes = {
 	// camelCase won`t work
