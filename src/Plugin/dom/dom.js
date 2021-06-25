@@ -72,6 +72,7 @@ export const off = (function() {
 		}
 	}
 })()
+
 /**
  * @param {DOM} el
  * @param {事件名称} event
@@ -87,6 +88,7 @@ export const once = function(el, event, fn) {
 	}
 	on(el, event, listener)
 }
+
 /**
      * @param {DOM} el
      * @param {事件名称} event
@@ -102,6 +104,7 @@ export const hasClass = function(el, cls) {
 		return (' ' + el.className + ' ').indexOf(' ' + cls + ' ') > -1
 	}
 }
+
 /**
      * @param {DOM} el
      * @param {className} cls
@@ -124,6 +127,7 @@ export const addClass = function(el, cls) {
 		}
 	}
 }
+
 /**
      * @param {DOM} el
      * @param {className} cls

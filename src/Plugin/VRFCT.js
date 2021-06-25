@@ -182,7 +182,7 @@ export function gqs(name) {
 }
 
 /**
- * 获取Cooke
+ * 获取Cooke名称
  * @param {cookie名称} name
  */
 export function getCookie(name) {
