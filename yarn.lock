@@ -2681,6 +2681,13 @@ dom7@^2.1.3:
   dependencies:
     ssr-window "^2.0.0"
 
+dom7@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/dom7/-/dom7-3.0.0.tgz#b861ce5d67a6becd7aaa3ad02942ff14b1240331"
+  integrity sha512-oNlcUdHsC4zb7Msx7JN3K0Nro1dzJ48knvBOnDPKJ2GV9wl1i5vydJZUSyOfrkKFDZEud/jBsTk92S/VGSAe/g==
+  dependencies:
+    ssr-window "^3.0.0-alpha.1"
+
 domain-browser@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.2.0.tgz#3d31f50191a6749dd1375a7f522e823d42e54eda"
@@ -6988,6 +6995,11 @@ ssr-window@^2.0.0:
   resolved "https://registry.yarnpkg.com/ssr-window/-/ssr-window-2.0.0.tgz#98c301aef99523317f8d69618f0010791096efc4"
   integrity sha512-NXzN+/HPObKAx191H3zKlYomE5WrVIkoCB5IaSdvKokxTpjBdWfr0RaP+1Z5KOfDT0ZVz+2tdtiBkhsEQ9p+0A==
 
+ssr-window@^3.0.0, ssr-window@^3.0.0-alpha.1:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ssr-window/-/ssr-window-3.0.0.tgz#fd5b82801638943e0cc704c4691801435af7ac37"
+  integrity sha512-q+8UfWDg9Itrg0yWK7oe5p/XRCJpJF9OBtXfOPgSJl+u3Xd5KI328RUEvUqSMVM9CiQUEf1QdBzJMkYGErj9QA==
+
 ssri@^5.2.4:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/ssri/-/ssri-5.3.0.tgz#ba3872c9c6d33a0704a7d71ff045e5ec48999d06"
@@ -7247,13 +7259,21 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-swiper@^4.0.7, swiper@^4.5.1:
+swiper@^4.0.7:
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/swiper/-/swiper-4.5.1.tgz#ed43998e780ceb478610079c8d23fd425eca636f"
   integrity sha512-se6I7PWWu950NAMXXT+ENtF/6SVb8mPyO+bTfNxbQBILSeLqsYp3Ndap+YOA0EczOIUlea274PKejT6gKZDseA==
   dependencies:
     dom7 "^2.1.3"
     ssr-window "^1.0.1"
+
+swiper@^6.5.1:
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-6.5.1.tgz#795630e45bbebb3b3b2945d55c22ffdcf5536c1b"
+  integrity sha512-iuyg4cr+L7wo5EI0fWUuW+lT3BnNtVTYtInhUC5JImTr0i8jNranx8BPyN8AOSKa6jBYN+oaCzj8DAwGK+ngRg==
+  dependencies:
+    dom7 "^3.0.0"
+    ssr-window "^3.0.0"
 
 table@^6.0.4:
   version "6.0.4"
