@@ -4,7 +4,6 @@
 			<div class="swiper-wrapper">
 				<div
 					class="swiper-slide"
-<<<<<<< HEAD
 					v-for="(item, index) in banner"
 					:key="'slide' + index"
 					:style="{
@@ -23,18 +22,6 @@
 					>
 						<div
 							:class="['swiper-tag', tag.right ? 'swiper-tag-right' : '']"
-=======
-					v-for="(item,index) in banner"
-					:key="'slide'+index"
-					:style="{backgroundColor:getColor(),height:item.full_h+'px',width:item.full_w+'px'}"
-				>
-					<img :data-src="item.normal_image" class="swiper-lazy" alt />
-					<div class="swiper-lazy-preloader"></div>
-
-					<transition name="op" v-for="(tag,key) in item.data.tag_spots" :key="'tage'+key">
-						<div
-							:class="['swiper-tag',tag.right?'swiper-tag-right':'']"
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 							:style="tag.style"
 							v-show="showTages"
 							ref="tag"
@@ -43,16 +30,11 @@
 								<div class="tag-dot-inner"></div>
 							</div>
 							<div class="swiper-tag-line"></div>
-<<<<<<< HEAD
 							<div class="swiper-tag-content">{{ tag.keyword }}</div>
-=======
-							<div class="swiper-tag-content">{{tag.keyword}}</div>
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 						</div>
 					</transition>
 				</div>
 			</div>
-<<<<<<< HEAD
 			<div class="swiper-count" v-if="banner.length > 0">
 				{{ index + 1 }} / {{ banner.length }}
 			</div>
@@ -60,22 +42,11 @@
 
 		<div class="user-info">
 			<div class="user-wrap" ref="userWrap">
-=======
-			<div class="swiper-count" v-if="banner.length>0">{{index+1}} / {{banner.length}}</div>
-		</div>
-
-		<div class="user-info">
-			<div class="user-wrap">
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 				<div class="user-left">
 					<div class="user-avatar">
 						<img v-lazy="user.user_pic" :alt="user.user_name" />
 					</div>
-<<<<<<< HEAD
 					<div class="user-name">{{ user.user_name }}</div>
-=======
-					<div class="user-name">{{user.user_name}}</div>
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 				</div>
 				<div class="user-right">
 					<div class="user-attention">+ 关注</div>
@@ -84,7 +55,6 @@
 
 			<div class="user-content">
 				<div class="content-box">
-<<<<<<< HEAD
 					<pre
 						v-html="common.content"
 						ref="content"
@@ -93,15 +63,11 @@
 					<span class="content-all" v-if="isAll" @click="allFn">{{
 						isOpen ? "收起" : "全文"
 					}}</span>
-=======
-					<pre v-html="common.content"></pre>
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 				</div>
 
 				<div class="user-statistics">
 					<div class="statistics-item">
 						<i aria-hidden="true" class="fa fa-thumbs-o-up"></i>
-<<<<<<< HEAD
 						<span>{{ common.zan_num }}</span>
 					</div>
 					<div class="statistics-item">
@@ -111,38 +77,22 @@
 					<div class="statistics-item">
 						<i aria-hidden="true" class="fa fa-star-o"></i>
 						<span>{{ common.like_num }}</span>
-=======
-						<span>{{common.zan_num}}</span>
-					</div>
-					<div class="statistics-item">
-						<i aria-hidden="true" class="fa fa-commenting-o"></i>
-						<span>{{common.comment_num}}</span>
-					</div>
-					<div class="statistics-item">
-						<i aria-hidden="true" class="fa fa-star-o"></i>
-						<span>{{common.like_num}}</span>
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 					</div>
 				</div>
 			</div>
 
 			<div class="user-latestComments">
 				<div class="latestComments-title">最新评论</div>
-<<<<<<< HEAD
 				<comment
 					v-for="(item, index) in comments"
 					:key="index"
 					:comment="item"
 				></comment>
-=======
-				<comment v-for="(item,index) in comments" :key="index" :comment="item"></comment>
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 			</div>
 
 			<div class="user-scenes">
 				<div class="scenes-title">相关推荐</div>
 				<div id="scenes">
-<<<<<<< HEAD
 					<div
 						class="scenes-padding"
 						v-for="(item, index) in pics"
@@ -153,18 +103,10 @@
 							<div
 								class="scenes-pic"
 								:style="{ backgroundColor: getColor() }"
-=======
-					<div class="scenes-padding" v-for="(item,index) in pics" :key="index" ref="scenes">
-						<router-link class="scenes-item" to>
-							<div
-								class="scenes-pic"
-								:style="{backgroundColor:getColor()}"
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 								:img_h="item.data.info.img_h"
 								:img_w="item.data.info.img_w"
 								ref="pic"
 							>
-<<<<<<< HEAD
 								<img
 									v-lazy="item.small_image"
 									:alt="'背景图' + index"
@@ -206,27 +148,6 @@
 									<div class="avatar-collect">
 										<i class="fa fa-star-o" aria-hidden="true"></i>
 										{{ item.favtimes }}
-=======
-								<img v-lazy="item.small_image" :alt="'背景图'+index" class="lazy" />
-								<i class="fa fa-tag" aria-hidden="true" v-if="item.tag_jump"></i>
-							</div>
-							<div class="scenes-bottom">
-								<div class="scenes-content" v-if="item.case_content">{{item.case_content}}</div>
-								<div class="scenes-mask" v-if="item.subtitle">
-									<div class="mask-wrap">
-										<img class="wrap-img" src="/static/image/tags.png" alt srcset />
-										{{item.subtitle}}
-									</div>
-								</div>
-								<div class="scenes-avatar">
-									<div class="avatar-img" :style="{backgroundColor:getColor()}">
-										<img v-lazy="item.user_pic" :alt="item.user_name" class="lazy" />
-									</div>
-									<div class="avatar-name">{{item.user_name}}</div>
-									<div class="avatar-collect">
-										<i class="fa fa-star-o" aria-hidden="true"></i>
-										{{item.favtimes}}
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 									</div>
 								</div>
 							</div>
@@ -234,13 +155,9 @@
 					</div>
 				</div>
 				<div class="scenes-more">
-<<<<<<< HEAD
 					<div class="more-bd fourColor0" @click="getPics()">
 						{{ loadingText }}
 					</div>
-=======
-					<div class="more-bd fourColor0" @click="getPics();">{{loadingText}}</div>
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 				</div>
 			</div>
 		</div>
@@ -248,7 +165,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import { getAlbumDetail, getSimilar } from '@/api/api.js'
 import { randomColor, isEmpty } from '@/Plugin/utils/index.js'
 import { setStyle, getStyle } from '@/Plugin/dom/dom.js'
@@ -281,37 +197,6 @@ export default {
 			isOpen: false,
 			even: {
 				// 偶数
-=======
-import { getAlbumDetail, getSimilar } from "@/api/api.js";
-import { randomColor, isEmpty } from "@/Plugin/utils/index.js";
-import { setStyle, getStyle } from "@/Plugin/dom/dom.js";
-import Swiper from "swiper";
-import comment from "@/components/comment";
-export default {
-	data() {
-		return {
-			pics: [], //轮播图数据
-			isLoading: true, //是否在加载中
-			params: {
-				space: "",
-				style: "",
-				part: "",
-				soft: "",
-				order: "0",
-				sharing: "0"
-			}, //分类
-			common: {}, //用户简介
-			user: {}, //用户信息
-			index: 0, //轮播图索引
-			showTages: true, //是否显示标签
-			comments: [], //评论
-			pics: [], //相关推荐
-			banner: [], //轮播图
-			page: 1, //页数
-			updateLength: 0,
-			even: {
-				//偶数
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 				maxHeight: 0,
 				lastDom: null
 			},
@@ -320,7 +205,6 @@ export default {
 				maxHeight: 0,
 				lastDom: null
 			},
-<<<<<<< HEAD
 			loadingText: '', // 加载文字
 			isMore: true // 是否可以加载操作
 		}
@@ -406,97 +290,9 @@ export default {
 				}
 			})
 		}
-=======
-			loadingText: "", //加载文字
-			isMore: true //是否可以加载操作
-		};
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
-	},
-	components: {
-		comment
-	},
-	watch: {
-		pics() {
-			this.$nextTick(() => {
-				if (Object.keys(this.$refs).length > 0) {
-					let result = this.$refs.pic.slice(-this.updateLength);
-					let scenes = this.$refs.scenes.slice(-this.updateLength);
-					// 默认列数
-					const col = 2;
-					if (this._getType(result) == "array") {
-						result.forEach((item, index) => {
-							const img_h = item.getAttribute("img_h");
-							const img_w = item.getAttribute("img_w");
-							let width = getStyle(item, "width");
-							if (typeof width == "string") {
-								let height = (img_h / img_w) * width.replace("px", "");
-								if (img_h && img_w) {
-									setStyle(item, "height", height + "px");
-								}
-							}
-						});
-					}
-					if (this._getType(scenes) == "array") {
-						scenes.forEach((item, index) => {
-							// 奇数
-							if ((index + 1) % col) {
-								setStyle(item, "top", this.odd.maxHeight + "px");
-								setStyle(item, "left", "0px");
-								this.odd.lastDom = item;
-								this.odd.maxHeight += item.getClientRects()[0].height;
-							} else {
-								// 偶数
-								const preScenes = scenes[
-									index - 1 == -1 ? 0 : index - 1
-								].getClientRects()[0].width;
-								setStyle(item, "left", preScenes + "px");
-								setStyle(item, "top", this.even.maxHeight + "px");
-								this.even.lastDom = item;
-								this.even.maxHeight += item.getClientRects()[0].height;
-							}
-						});
-						// even:偶数  odd：基数
-						if (this.even.maxHeight >= this.odd.maxHeight) {
-							const lastDOMRectList = this.even.lastDom.getClientRects()[0];
-							if (
-								this.odd.maxHeight + lastDOMRectList.height <
-								this.even.maxHeight
-							) {
-								setStyle(this.even.lastDom, "left", "0px");
-								setStyle(this.even.lastDom, "top", this.odd.maxHeight + "px");
-								this.even.maxHeight =
-									this.even.maxHeight - lastDOMRectList.height;
-								this.odd.maxHeight =
-									this.odd.maxHeight + lastDOMRectList.height;
-							}
-						} else {
-							const lastDOMRectList = this.odd.lastDom.getClientRects()[0];
-							if (
-								this.even.maxHeight + lastDOMRectList.height <
-								this.odd.maxHeight
-							) {
-								setStyle(
-									this.odd.lastDom,
-									"left",
-									lastDOMRectList.width + "px"
-								);
-								setStyle(this.odd.lastDom, "top", this.even.maxHeight + "px");
-								this.odd.maxHeight =
-									this.odd.maxHeight - lastDOMRectList.height;
-								this.even.maxHeight =
-									this.even.maxHeight + lastDOMRectList.height;
-							}
-						}
-						const max = Math.max(this.even.maxHeight, this.odd.maxHeight);
-						setStyle(document.getElementById("scenes"), "height", max + "px");
-					}
-				}
-			});
-		}
 	},
 	methods: {
 		async getDetail() {
-<<<<<<< HEAD
 			const { params } = this.$route
 			const { data } = await getAlbumDetail({ params: params })
 			if (data?.success_code === 200) {
@@ -525,39 +321,10 @@ export default {
 												.height
 											const tag_w = this.$refs.tag[index].getClientRects()?.[0]
 												.width
-=======
-			const { params } = this.$route;
-			const { data } = await getAlbumDetail({ params: params });
-			if (data?.success_code == 200) {
-				const banner = data?.data?.pics;
-				const common = data?.data?.common;
-				const comments = data?.data?.comment_preview?.comments;
-				if (this._getType(banner) == "array") {
-					this.banner = [...banner];
-					banner.forEach(element => {
-						const img_h = element?.data?.info?.img_h;
-						const img_w = element?.data?.info?.img_w;
-						const tag_spots = element?.data?.tag_spots;
-						const full_w = document.body.getClientRects()?.[0].width;
-						if (img_h && img_w && full_w) {
-							element.full_w = full_w;
-							element.full_h = (img_h / img_w) * full_w;
-							if (this._getType(tag_spots) == "array") {
-								tag_spots.forEach((item, index) => {
-									const x = item?.x;
-									const y = item?.y;
-									if (x && y) {
-										this.$nextTick(() => {
-											const tag_h = this.$refs.tag[index].getClientRects()?.[0]
-												.height;
-											const tag_w = this.$refs.tag[index].getClientRects()?.[0]
-												.width;
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 											if (tag_h && tag_w) {
 												item.style = {
 													...((element.full_h / img_h) * y + tag_h >=
 													element.full_h
-<<<<<<< HEAD
 														? { bottom: '0px' }
 														: y > 0
 															? { top: (element.full_h / img_h) * y + 'px' }
@@ -616,78 +383,10 @@ export default {
 				}
 				if (this._getType(comments) === 'array') {
 					this.comments = [...comments]
-=======
-														? { bottom: "0px" }
-														: y > 0
-														? { top: (element.full_h / img_h) * y + "px" }
-														: { top: "0px" }),
-													...((element.full_w / img_w) * x >= element.full_w / 2
-														? {
-																right:
-																	(element.full_w / img_w) * x >= element.full_w
-																		? "0px"
-																		: element.full_w -
-																		  (element.full_w / img_w) * x +
-																		  "px"
-														  }
-														: {
-																left: (element.full_w / img_w) * x + "px"
-														  })
-												};
-											}
-										});
-										item.right =
-											(element.full_w / img_w) * x >= element.full_w / 2
-												? true
-												: false;
-									}
-								});
-							}
-						}
-					});
-					this.$nextTick(() => {
-						const _this = this;
-						const userSwiper = new Swiper(".swiper-container", {
-							autoplay: false,
-							observer: true, //修改swiper的子元素时
-							observeParents: true, //当Swiper的父元素变化时
-							lazy: true,
-							autoHeight: true, //高度随内容变化
-							slidesPerView: "auto",
-							watchSlidesVisibility: true,
-							preventClicksPropagation: false,
-							on: {
-								transitionEnd: function() {
-									const index = this.activeIndex;
-									if (_this.index != index) {
-										_this.index = index;
-									}
-								},
-								click: function() {
-									_this.showTages = !_this.showTages;
-								}
-							}
-						});
-						if (this.isLoading) {
-							this.isLoading = false;
-						}
-					});
-				}
-				if (this._getType(common) == "object") {
-					const user = common?.user;
-					if (this._getType(user) == "object") {
-						this.user = { ...user };
-					}
-					this.common = { ...common };
-				}
-				if (this._getType(comments) == "array") {
-					this.comments = [...comments];
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 				}
 			}
 		},
 		getRedirectedFrom() {
-<<<<<<< HEAD
 			let { redirectedFrom } = this.$route
 			const length = Object.keys(this.params).length
 			let redirectArr = []
@@ -698,64 +397,6 @@ export default {
 				redirectedFrom = sessionStorage.getItem('redirectedFrom')
 				if (!isEmpty(redirectedFrom)) {
 					redirectArr = [...redirectedFrom.split('/')]
-=======
-			let redirectedFrom = this.$route?.redirectedFrom;
-			const length = Object.keys(this.params).length;
-			let redirectArr = [];
-			if (redirectedFrom) {
-				redirectArr = [...redirectedFrom.split("/")];
-				sessionStorage.setItem("redirectedFrom", redirectedFrom);
-			} else {
-				redirectedFrom = sessionStorage.getItem("redirectedFrom");
-				if (!isEmpty(redirectedFrom)) {
-					redirectArr = [...redirectedFrom.split("/")];
-				}
-			}
-			const arrLength = redirectArr.length;
-			if (arrLength >= length) {
-				let paramsArr = redirectArr.slice(-length);
-				Object.keys(this.params).forEach((item, index) => {
-					this.params[item] = paramsArr[index];
-				});
-			}
-		},
-		deleteRedirectedFrom() {
-			const redirectedFrom = sessionStorage.getItem("redirectedFrom");
-			if (!isEmpty(redirectedFrom)) {
-				sessionStorage.removeItem("redirectedFrom");
-			}
-		},
-		getColor: randomColor,
-		async getPics() {
-			this.loadingText = "加载中...";
-			if (!this.isMore) return;
-			this.isMore = false;
-			const { id } = this.$route.params;
-			const { data } = await getSimilar({
-				params: {
-					match_id: id,
-					page: this.page
-				}
-			});
-			if (data?.success_code == 200) {
-				const pics = data?.data?.pics;
-				if (this._getType(pics) == "array") {
-					if (pics.length > 0) {
-						this.updateLength = pics.length;
-						this.page++;
-						pics.forEach(item => {
-							const subtitle = item?.short_post?.tags_info?.topic_tag?.subtitle;
-							if (subtitle) {
-								item.subtitle = subtitle;
-							}
-						});
-						this.pics = [...this.pics, ...pics];
-						this.loadingText = "加载更多";
-						if (!this.isMore) this.isMore = true;
-					} else {
-						this.loadingText = "加载完毕";
-					}
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 				}
 			}
 			const arrLength = redirectArr.length
@@ -830,30 +471,15 @@ export default {
 		}
 	},
 	created() {
-<<<<<<< HEAD
 		this.getRedirectedFrom()
 		this.getDetail()
 		this.getPics()
 	},
 	destroyed() {
 		this.deleteRedirectedFrom()
-=======
-		this.getRedirectedFrom();
-		this.getDetail();
-		this.getPics();
-	},
-	destroyed() {
-		this.deleteRedirectedFrom();
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 	}
 }
 </script>
-<<<<<<< HEAD
-=======
-<style lang="css" scoped>
-@import "swiper/css/swiper.css";
-</style>
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 <style lang="less" scoped>
 @import url("~@/style/fuction.less");
 .slide-user {
@@ -961,7 +587,6 @@ export default {
 		.user-content {
 			margin-bottom: 5.208px;
 			background-color: #fff;
-<<<<<<< HEAD
 			.content {
 				&-box {
 					padding: 0 18.75px 25px;
@@ -982,14 +607,6 @@ export default {
 				}
 			}
 
-=======
-			.content-box {
-				padding: 0 18.75px 25px;
-				font-size: 14.5833px;
-				color: #333;
-				text-align: justify;
-			}
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 			.user-statistics {
 				display: flex;
 				padding: 0 0 25px 20.833px;
@@ -1053,15 +670,9 @@ export default {
 							right: 5.208px;
 							font-size: 14px;
 							transform: rotate(90deg);
-<<<<<<< HEAD
 							padding: 3.042px 4.167px;
 							background-color: rgba(51, 51, 51, 0.6);
 							border-radius: 3.12504px;
-=======
-              padding: 3.042px 4.167px;
-               background-color: rgba(51, 51, 51, 0.6);
-              border-radius: 3.12504px;
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
 						}
 					}
 					.scenes-bottom {
@@ -1143,8 +754,4 @@ export default {
 		}
 	}
 }
-<<<<<<< HEAD
 </style>
-=======
-</style>
->>>>>>> d9854a9668d7b8b2f650720eb7dd09112bdad40f
